@@ -23,7 +23,7 @@ int GetOperator(char op)
 	static char Operators[] = "+-*/()";
 	if (op == '\0') return 0;
 	for (int i = 0; Operators[i] != '\0'; i++)
-		if (Operators[i] == op) return i + 1;
+		if (Operators[i] == op) return i + 1;   // 起止运算符编码约定为0，实际运算符编码从1开始。
 	return -1;
 }
 
