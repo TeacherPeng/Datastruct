@@ -9,7 +9,7 @@ struct TriNode
 struct TriTable
 {
 	TriNode *datas;
-	int mu, nu, tu;  // 行数，列数，非零元个数
+	int mu, nu, tu; // 行数，列数，非零元个数
 };
 
 int CreateTriTable(TriTable &T, int matrix[], int m, int n)
@@ -19,14 +19,15 @@ int CreateTriTable(TriTable &T, int matrix[], int m, int n)
 
 	// 统计非零元的个数，分配存储空间
 	int count = 0;
-	for (int i = 0; i < m*n; i++)
-		if (matrix[i] != 0) count++;
+	for (int i = 0; i < m * n; i++)
+		if (matrix[i] != 0)
+			count++;
 	T.tu = count;
 	T.datas = new TriNode[count];
 
 	// 填写三元组表
 	int k = 0, t = 0;
-	for (int i = 0; i<m; i++)
+	for (int i = 0; i < m; i++)
 		for (int j = 0; j < n; j++)
 		{
 			if (matrix[k] != 0)
@@ -43,7 +44,7 @@ int CreateTriTable(TriTable &T, int matrix[], int m, int n)
 
 int DestroyTriTable(TriTable &T)
 {
-	delete[]T.datas;
+	delete[] T.datas;
 	T.mu = T.nu = T.tu = 0;
 	return 0;
 }
@@ -69,7 +70,8 @@ int FastTranspose(TriTable &B, TriTable &A)
 
 	// 统计结果矩阵每行非零元个数
 	int *rsum = new int[B.mu];
-	for (int i = 0; i < B.mu; i++) rsum[i] = 0;
+	for (int i = 0; i < B.mu; i++)
+		rsum[i] = 0;
 	for (int i = 0; i < A.tu; i++)
 		rsum[A.datas[i].col]++;
 
@@ -89,8 +91,8 @@ int FastTranspose(TriTable &B, TriTable &A)
 		rpos[A.datas[i].col]++;
 	}
 
-	delete[]rpos;
-	delete[]rsum;
+	delete[] rpos;
+	delete[] rsum;
 	return 0;
 }
 
@@ -99,9 +101,9 @@ int main()
 	int *matrix, m, n;
 	cout << "请输入行数 列数：";
 	cin >> m >> n;
-	matrix = new int[m*n];
+	matrix = new int[m * n];
 	cout << "请按行优先顺序输入矩阵：";
-	for (int i = 0; i < m*n; i++)
+	for (int i = 0; i < m * n; i++)
 	{
 		cin >> matrix[i];
 	}
@@ -118,6 +120,7 @@ int main()
 
 	DestroyTriTable(T1);
 	DestroyTriTable(T2);
+	delete[] matrix;
 	system("pause");
 	return 0;
 }
