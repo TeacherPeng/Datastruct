@@ -1,42 +1,42 @@
-#include <iostream>
+ï»¿#include <iostream>
 #include <vector>
 using namespace std;
 int main()
 {
 	vector<int> list1;
 
-	// Ìí¼ÓÊı¾İ
+	// æ·»åŠ æ•°æ®
 	for (int i = 0; i < 10; i++)
 		list1.push_back(i);
 
-	// ÏÂ±ê·½Ê½±éÀúÊä³ö
+	// ä¸‹æ ‡æ–¹å¼éå†è¾“å‡º
 	for (int i = 0; i < list1.size(); i++)
 		cout << list1[i] << ", ";
 	cout << endl;
 
-	// ²åÈëÊı¾İ
-	list1.insert(list1.begin(), 10); // ½«10²åÈëµ½ÏÂ±ê0Î»ÖÃ
-	list1.insert(list1.begin() + 2, 20); // ½«20²åÈëµ½ÏÂ±ê2Î»ÖÃ
+	// æ’å…¥æ•°æ®
+	list1.insert(list1.begin(), 10); // å°†10æ’å…¥åˆ°ä¸‹æ ‡0ä½ç½®
+	list1.insert(list1.begin() + 2, 20); // å°†20æ’å…¥åˆ°ä¸‹æ ‡2ä½ç½®
 
-	// ÏÂ±ê·½Ê½±éÀúÊä³ö
+	// ä¸‹æ ‡æ–¹å¼éå†è¾“å‡º
 	for (int i = 0; i < list1.size(); i++)
 		cout << list1[i] << ", ";
 	cout << endl;
 
-	// É¾³ıÏÂ±êÎª5µÄÊı¾İ
+	// åˆ é™¤ä¸‹æ ‡ä¸º5çš„æ•°æ®
 	list1.erase(list1.begin() + 5); 
 
-	// ÏÂ±ê·½Ê½±éÀúÊä³ö
+	// ä¸‹æ ‡æ–¹å¼éå†è¾“å‡º
 	for (int i = 0; i < list1.size(); i++)
 		cout << list1[i] << ", ";
 	cout << endl;
 
-	// ÏÂ±ê·½Ê½±éÀúÊä³ö
+	// ä¸‹æ ‡æ–¹å¼éå†è¾“å‡º
 	for (int i = 0; i < list1.size(); i++) 
 		cout << list1[i] << ", ";
 	cout << endl;
 
-	// µü´úÆ÷±éÀúÊä³ö
+	// è¿­ä»£å™¨éå†è¾“å‡º
 	for (vector<int>::iterator it = list1.begin(); it != list1.end(); it++)
 		cout << *it << ", ";
 	cout << endl;

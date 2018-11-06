@@ -9,7 +9,7 @@ struct TriNode
 struct TriTable
 {
     TriNode *datas; // 三元组表，按行优先顺序存储矩阵中的非零元。
-    int *row;       // 行向量，row[i]表示i行在datas中的起始下标。
+    int *rpos;       // 行向量，row[i]表示i行在datas中的起始下标。
     int mu, nu, tu; // 行数，列数，非零元个数。
 };
 
@@ -25,13 +25,13 @@ int CreateTriTable(TriTable &T, int matrix[], int n1, int n2)
             count++;
     T.tu = count;
     T.datas = new TriNode[count];
-    T.row = new int[n1 + 1];
+    T.rpos = new int[n1 + 1];
 
     // 填写三元组表
     int k = 0, t = 0;
     for (int i = 0; i < n1; i++)
     {
-        T.row[i] = t;
+        T.rpos[i] = t;
         for (int j = 0; j < n2; j++)
         {
             if (matrix[k] != 0)
@@ -44,14 +44,14 @@ int CreateTriTable(TriTable &T, int matrix[], int n1, int n2)
             k++;
         }
     }
-    T.row[n1] = t;
+    T.rpos[n1] = t;
     return 0;
 }
 
 int DestroyTriTable(TriTable &T)
 {
     delete[] T.datas;
-    delete[] T.row;
+    delete[] T.rpos;
     T.mu = T.nu = T.tu = 0;
     return 0;
 }
@@ -77,11 +77,11 @@ int MatrixMulti(TriTable &C, TriTable &A, TriTable &B)
     for (int i = 0; i < A.mu; i++)
     {
         // 取A的第i行中的非零元
-        for (int j = A.row[i]; j < A.row[i + 1]; j++)
+        for (int j = A.rpos[i]; j < A.rpos[i + 1]; j++)
         {
             // A[i]中的非零元与B的对应行中的非零元对乘，结果累加到C的第i行中
             int r = A.datas[j].col;
-            for (int k = B.row[r]; k < B.row[r + 1]; k++)
+            for (int k = B.rpos[r]; k < B.rpos[r + 1]; k++)
             {
                 cp[B.datas[k].col] += A.datas[j].data * B.datas[k].data;
             }
@@ -134,7 +134,7 @@ int main()
     TriTable T3;
     MatrixMulti(T3, T1, T2);
     cout << "C = A * B：" << endl;
-    PrintTriTable(T2);
+    PrintTriTable(T3);
 
     DestroyTriTable(T1);
     DestroyTriTable(T2);

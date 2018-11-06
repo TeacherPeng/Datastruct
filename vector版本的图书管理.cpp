@@ -1,9 +1,9 @@
-#include <iostream>	
+ï»¿#include <iostream>	
 #include <vector>
 #include <cstring>
 using namespace std;
 
-// Í¼ÊéĞÅÏ¢
+// å›¾ä¹¦ä¿¡æ¯
 struct Book
 {
 	char name[1024];
@@ -12,7 +12,7 @@ struct Book
 };
 typedef vector<Book> Books;
 
-// ´òÓ¡Í¼ÊéÄ¿Â¼
+// æ‰“å°å›¾ä¹¦ç›®å½•
 int PrintBooks(Books &aLib)
 {
 	for (int i = 0; i < aLib.size(); i++)
@@ -24,10 +24,10 @@ int PrintBooks(Books &aLib)
 	return 0;
 }
 
-// °´ÊéÃû²éÕÒÍ¼Êé¼ÇÂ¼£¬Èç¹ûÕÒµ½£¬·µ»ØĞòºÅ£¨ÏÂ±ê£©£¬Èç¹ûÃ»ÓĞÕÒµ½£¬Ô¼¶¨·µ»Ø-1¡£
+// æŒ‰ä¹¦åæŸ¥æ‰¾å›¾ä¹¦è®°å½•ï¼Œå¦‚æœæ‰¾åˆ°ï¼Œè¿”å›åºå·ï¼ˆä¸‹æ ‡ï¼‰ï¼Œå¦‚æœæ²¡æœ‰æ‰¾åˆ°ï¼Œçº¦å®šè¿”å›-1ã€‚
 int FindBook(Books &aLib, char aName[])
 {
-	// Ë³Ğò±éÀú²éÕÒ
+	// é¡ºåºéå†æŸ¥æ‰¾
 	for (int i = 0; i < aLib.size(); i++)
 	{
 		if (strcmp(aLib.data[i].name, aName) == 0)
@@ -38,12 +38,12 @@ int FindBook(Books &aLib, char aName[])
 
 int ShowMenu()
 {
-	cout << "1. Ìí¼ÓÍ¼Êé" << endl;
-	cout << "2. °´ÊéÃûÉ¾³ıÍ¼Êé" << endl;
-	cout << "3. °´ÊéÃû²éÕÒÍ¼Êé" << endl;
-	cout << "4. ´òÓ¡Í¼ÊéÄ¿Â¼" << endl;
-	cout << "0. ÍË³ö" << endl;
-	cout << "ÇëÑ¡Ôñ£º";
+	cout << "1. æ·»åŠ å›¾ä¹¦" << endl;
+	cout << "2. æŒ‰ä¹¦ååˆ é™¤å›¾ä¹¦" << endl;
+	cout << "3. æŒ‰ä¹¦åæŸ¥æ‰¾å›¾ä¹¦" << endl;
+	cout << "4. æ‰“å°å›¾ä¹¦ç›®å½•" << endl;
+	cout << "0. é€€å‡º" << endl;
+	cout << "è¯·é€‰æ‹©ï¼š";
 
 	int op;
 	cin >> op;
@@ -61,43 +61,43 @@ int main()
 		{
 		case 1:
 		{
-			// Ìí¼ÓÍ¼Êé£¨²ÉÓÃ±ê×¼ÊäÈë£¬ÊéÃû¡¢×÷ÕßÃûºÍ±àÂëÖĞ²»ÄÜº¬ÓĞ¿Õ°×·û£©
+			// æ·»åŠ å›¾ä¹¦ï¼ˆé‡‡ç”¨æ ‡å‡†è¾“å…¥ï¼Œä¹¦åã€ä½œè€…åå’Œç¼–ç ä¸­ä¸èƒ½å«æœ‰ç©ºç™½ç¬¦ï¼‰
 			Book aBook;
 			int aIndex;
-			cout << "ÇëÒÀ´ÎÊäÈë ÊéÃû ×÷Õß ±àÂë ²åÈëÎ»ÖÃ£º";
+			cout << "è¯·ä¾æ¬¡è¾“å…¥ ä¹¦å ä½œè€… ç¼–ç  æ’å…¥ä½ç½®ï¼š";
 			cin >> aBook.name >> aBook.author >> aBook.code >> aIndex;
 			if (lib.insert(lib.begin() + aIndex, aBook) != lib.end())
-				cout << "²åÈë¼ÇÂ¼³É¹¦£¡" << endl;
+				cout << "æ’å…¥è®°å½•æˆåŠŸï¼" << endl;
 			else
-				cout << "²åÈë¼ÇÂ¼Ê§°Ü£¡" << endl;
+				cout << "æ’å…¥è®°å½•å¤±è´¥ï¼" << endl;
 			break;
 		}
 		case 2:
 		{
-			// °´ÊéÃûÉ¾³ıÍ¼Êé
+			// æŒ‰ä¹¦ååˆ é™¤å›¾ä¹¦
 			char aName[1024];
-			cout << "ÇëÊäÈëÒªÉ¾³ıÍ¼ÊéµÄÊéÃû£º";
+			cout << "è¯·è¾“å…¥è¦åˆ é™¤å›¾ä¹¦çš„ä¹¦åï¼š";
 			cin >> aName;
 			
 			int aIndex = FindBook(lib, aName);
 			if (aIndex < 0)
-				cout << "Ã»ÓĞÕÒµ½ÏàÍ¬ÊéÃûµÄ¼ÇÂ¼£¡" << endl;
+				cout << "æ²¡æœ‰æ‰¾åˆ°ç›¸åŒä¹¦åçš„è®°å½•ï¼" << endl;
 			else 
             {
                 lib.erase(lib.begin() + aIndex);
-				cout << "É¾³ıÍ¼Êé³É¹¦£¡" << endl;
+				cout << "åˆ é™¤å›¾ä¹¦æˆåŠŸï¼" << endl;
             }
 			break;
 		}
 		case 3:
 		{
-			// °´ÊéÃû²éÕÒÍ¼Êé
+			// æŒ‰ä¹¦åæŸ¥æ‰¾å›¾ä¹¦
 			char aName[1024];
-			cout << "ÇëÊäÈëÒª²éÕÒµÄÍ¼ÊéµÄÊéÃû£º";
+			cout << "è¯·è¾“å…¥è¦æŸ¥æ‰¾çš„å›¾ä¹¦çš„ä¹¦åï¼š";
 			cin >> aName;
 			int aIndex = FindBook(lib, aName);
 			if (aIndex < 0)
-				cout << "Ã»ÓĞÕÒµ½ÏàÍ¬ÊéÃûµÄ¼ÇÂ¼£¡" << endl;
+				cout << "æ²¡æœ‰æ‰¾åˆ°ç›¸åŒä¹¦åçš„è®°å½•ï¼" << endl;
 			else
 				cout << aIndex << ".\t"
 				<< lib.data[aIndex].name << "\t"
@@ -107,7 +107,7 @@ int main()
 		}
 		case 4:
 		{
-			// ´òÓ¡Í¼ÊéÄ¿Â¼
+			// æ‰“å°å›¾ä¹¦ç›®å½•
 			PrintBooks(lib);
 			break;
 		}

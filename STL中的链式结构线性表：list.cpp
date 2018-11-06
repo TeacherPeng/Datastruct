@@ -1,32 +1,32 @@
-#include <iostream>
+ï»¿#include <iostream>
 #include <list>
 using namespace std;
 int main()
 {
 	list<int> list1;
 
-	// Ìí¼ÓÊı¾İ
+	// æ·»åŠ æ•°æ®
 	for (int i = 0; i < 10; i++) list1.push_back(i);
 
-	// µü´úÆ÷±éÀúÊä³ö
+	// è¿­ä»£å™¨éå†è¾“å‡º
 	for (list<int>::iterator it = list1.begin(); it != list1.end(); it++) cout << *it << ", ";
 	cout << endl;
 
-	// ÔÚÃ¿¸öÊı¾İÇ°²åÈëÆä10±¶
+	// åœ¨æ¯ä¸ªæ•°æ®å‰æ’å…¥å…¶10å€
 	for (list<int>::iterator it = list1.begin(); it != list1.end(); it++) list1.insert(it, *it * 10);
 
-	// µü´úÆ÷±éÀúÊä³ö
+	// è¿­ä»£å™¨éå†è¾“å‡º
 	for (list<int>::iterator it = list1.begin(); it != list1.end(); it++) cout << *it << ", ";
 	cout << endl;
 
-	// µü´úÆ÷±éÀú²¢É¾³ıËùÓĞ3µÄ±¶Êı
+	// è¿­ä»£å™¨éå†å¹¶åˆ é™¤æ‰€æœ‰3çš„å€æ•°
 	list<int>::iterator it = list1.begin();
 	while (it != list1.end())
 	{
 		if (*it % 3 == 0) it = list1.erase(it); else it++;
 	}
 
-	// µü´úÆ÷±éÀúÊä³ö
+	// è¿­ä»£å™¨éå†è¾“å‡º
 	for (list<int>::iterator it = list1.begin(); it != list1.end(); it++) cout << *it << ", ";
 	cout << endl;
 
