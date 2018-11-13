@@ -1,8 +1,8 @@
-#include <iostream>
+ï»¿#include <iostream>
 #include <ctime>
 using namespace std;
 
-// Êä³öĞòÁĞ
+// è¾“å‡ºåºåˆ—
 int OutputSequence(int L[], int n)
 {
 	for (int i = 0; i < n; i++)
@@ -11,7 +11,7 @@ int OutputSequence(int L[], int n)
 	return 0;
 }
 
-// Ö±½Ó²åÈëÅÅĞò·¨£¬Ô¤ÁôÁËL[0]Î»ÖÃ£¬Êı¾İ´ÓL[1]~L[n]
+// ç›´æ¥æ’å…¥æ’åºæ³•ï¼Œé¢„ç•™äº†L[0]ä½ç½®ï¼Œæ•°æ®ä»L[1]~L[n]
 int InsertSort(int L[], int n)
 {
 	for (int i = 2; i <= n; i++)
@@ -26,7 +26,7 @@ int InsertSort(int L[], int n)
 	return 0;
 }
 
-// Ö±½Ó½»»»ÅÅĞò·¨£¨Ã°ÅİÅÅĞò£©
+// ç›´æ¥äº¤æ¢æ’åºæ³•ï¼ˆå†’æ³¡æ’åºï¼‰
 int SwapSort(int L[], int n)
 {
 	for (int i = 0; i < n - 1; i++)
@@ -46,7 +46,7 @@ int SwapSort(int L[], int n)
 	return 0;
 }
 
-// ¿ìËÙÅÅĞòµÄ»®·Ö¹ı³Ì£¨µÚÈı¸ö²ÎÊıÊÇÎªÊä³öÅÅĞò½á¹û¶øÔö¼ÓµÄ£©
+// å¿«é€Ÿæ’åºçš„åˆ’åˆ†è¿‡ç¨‹ï¼ˆç¬¬ä¸‰ä¸ªå‚æ•°æ˜¯ä¸ºè¾“å‡ºæ’åºç»“æœè€Œå¢åŠ çš„ï¼‰
 int Partition(int L[], int s, int t, int n)
 {
 	int temp = L[s];
@@ -64,7 +64,7 @@ int Partition(int L[], int s, int t, int n)
 	OutputSequence(L, n);
 	return low;
 }
-// ¿ìËÙÅÅĞòµÄµİ¹é¹ı³Ì
+// å¿«é€Ÿæ’åºçš„é€’å½’è¿‡ç¨‹
 int QSort(int L[], int s, int t, int n)
 {
 	if (s >= t) return 0;
@@ -73,30 +73,30 @@ int QSort(int L[], int s, int t, int n)
 	QSort(L, k + 1, t, n);
 	return 0;
 }
-// ¿ìËÙÅÅĞò·¨µÄÖ÷¹ı³Ì
+// å¿«é€Ÿæ’åºæ³•çš„ä¸»è¿‡ç¨‹
 int QuickSort(int L[], int n)
 {
 	return QSort(L, 0, n - 1, n);
 }
 
-// ¶ÔL[s]~L[n-1]½øĞĞ¶Ñµ÷Õû
+// å¯¹L[s]~L[n-1]è¿›è¡Œå †è°ƒæ•´
 int HeapAdjust(int L[], int n, int s, int n0)
 {
 	int i = s;
-	// ´ÓÖ¸¶¨Æğµãµ÷Õûµ½Ò¶½áµã£¨Ã»ÓĞ×ó×Ó¼´ÎªÒ¶½áµã£©
+	// ä»æŒ‡å®šèµ·ç‚¹è°ƒæ•´åˆ°å¶ç»“ç‚¹ï¼ˆæ²¡æœ‰å·¦å­å³ä¸ºå¶ç»“ç‚¹ï¼‰
 	while (i + i + 1 < n)
 	{
-		// È·¶¨½áµãiµÄ×î´ó×Ó½áµãj
-		int j = i + i + 1;						// ÏÈÈ¡½áµãiµÄ×ó×ÓÎªj
-		if (j + 1 < n && L[j] < L[j + 1]) j++;	// Èç¹û½áµãiÓĞÓÒ×ÓÇÒÓÒ×Ó±È×ó×Ó´ó£¬ÔòÈ¡ÓÒ×ÓÎªj
-		if (L[j] <= L[i]) break;				// Èç¹û½áµãiµÄ×î´ó×Ó½áµãj²»±È½áµãi¸ü´ó£¬Ôò²»ĞèÒªÔÙµ÷ÕûÁË¡£
-		swap(L[j], L[i]);						// Èç¹û½áµãiµÄ×î´ó×Ó½áµãj±È½áµãi´ó£¬Ôò½»»»½áµãiºÍj
+		// ç¡®å®šç»“ç‚¹içš„æœ€å¤§å­ç»“ç‚¹j
+		int j = i + i + 1;						// å…ˆå–ç»“ç‚¹içš„å·¦å­ä¸ºj
+		if (j + 1 < n && L[j] < L[j + 1]) j++;	// å¦‚æœç»“ç‚¹iæœ‰å³å­ä¸”å³å­æ¯”å·¦å­å¤§ï¼Œåˆ™å–å³å­ä¸ºj
+		if (L[j] <= L[i]) break;				// å¦‚æœç»“ç‚¹içš„æœ€å¤§å­ç»“ç‚¹jä¸æ¯”ç»“ç‚¹iæ›´å¤§ï¼Œåˆ™ä¸éœ€è¦å†è°ƒæ•´äº†ã€‚
+		swap(L[j], L[i]);						// å¦‚æœç»“ç‚¹içš„æœ€å¤§å­ç»“ç‚¹jæ¯”ç»“ç‚¹iå¤§ï¼Œåˆ™äº¤æ¢ç»“ç‚¹iå’Œj
 		OutputSequence(L, n0);
-		i = j;									// ²¢½«µ÷ÕûµãÒÆµ½½áµãj
+		i = j;									// å¹¶å°†è°ƒæ•´ç‚¹ç§»åˆ°ç»“ç‚¹j
 	}
 	return 0;
 }
-// ÓÃÖ¸¶¨´ıÅÅĞòĞòÁĞ´´½¨Ò»¸ö´ó¶¥¶Ñ
+// ç”¨æŒ‡å®šå¾…æ’åºåºåˆ—åˆ›å»ºä¸€ä¸ªå¤§é¡¶å †
 int CreateHeap(int L[], int n)
 {
 	for (int i = n / 2 - 1; i >= 0; i--)
@@ -105,24 +105,24 @@ int CreateHeap(int L[], int n)
 	}
 	return 0;
 }
-// ¶ÑÅÅĞò
+// å †æ’åº
 int HeapSort(int L[], int n)
 {
-	// ÏÈ½«´ıÅÅĞòĞòÁĞ´´½¨³ÉÒ»¸ö´ó¶¥¶Ñ
+	// å…ˆå°†å¾…æ’åºåºåˆ—åˆ›å»ºæˆä¸€ä¸ªå¤§é¡¶å †
 	CreateHeap(L, n);
-	// ¿ªÊ¼ÅÅĞò£¬´ı´¦ÀíµÄ´ó¶¥¶ÑµÄ½áµãÊı´Ónµİ¼õµ½1
+	// å¼€å§‹æ’åºï¼Œå¾…å¤„ç†çš„å¤§é¡¶å †çš„ç»“ç‚¹æ•°ä»né€’å‡åˆ°1
 	for (int i = n; i > 1; i--)
 	{
-		// ½»»»¶Ñ¶¥Óë×îºóÒ»Æ¬Ò¶×Ó
+		// äº¤æ¢å †é¡¶ä¸æœ€åä¸€ç‰‡å¶å­
 		swap(L[0], L[i - 1]);
 		OutputSequence(L, n);
-		// µ÷Õû
+		// è°ƒæ•´
 		HeapAdjust(L, i - 1, 0, n);
 	}
 	return 0;
 }
 
-// ´´½¨È¡Öµ·¶Î§1~nµÄËæ»úĞòÁĞ£¬ÈÅ¶¯´ÎÊıÎªm
+// åˆ›å»ºå–å€¼èŒƒå›´1~nçš„éšæœºåºåˆ—ï¼Œæ‰°åŠ¨æ¬¡æ•°ä¸ºm
 int CreateRandSequence(int L[], int n, int m)
 {
 	for (int i = 0; i < n; i++)
@@ -141,29 +141,29 @@ int main()
 	L = new int[n + 1];
 	CreateRandSequence(L0, n, m);
 
-	cout << "Ö±½Ó²åÈëÅÅĞò·¨¹ı³Ì£º" << endl;
+	cout << "ç›´æ¥æ’å…¥æ’åºæ³•è¿‡ç¨‹ï¼š" << endl;
 	memcpy(L + 1, L0, n * sizeof(int));
 	OutputSequence(L + 1, n);
 	InsertSort(L, n);
 
-	cout << "\nÃ°ÅİÅÅĞò·¨¹ı³Ì£º" << endl;
+	cout << "\nå†’æ³¡æ’åºæ³•è¿‡ç¨‹ï¼š" << endl;
 	memcpy(L, L0, n * sizeof(int));
 	OutputSequence(L, n);
 	SwapSort(L, n);
 
-	cout << "\n¿ìËÙÅÅĞò·¨¹ı³Ì£º" << endl;
+	cout << "\nå¿«é€Ÿæ’åºæ³•è¿‡ç¨‹ï¼š" << endl;
 	memcpy(L, L0, n * sizeof(int));
 	OutputSequence(L, n);
 	QuickSort(L, n);
 
-	cout << "\n¶ÑÅÅĞò·¨¹ı³Ì£º" << endl;
+	cout << "\nå †æ’åºæ³•è¿‡ç¨‹ï¼š" << endl;
 	memcpy(L, L0, n * sizeof(int));
 	OutputSequence(L, n);
 	HeapSort(L, n);
 
 	delete[]L;
 	delete[]L0;
-	cout << "ÑİÊ¾Íê±Ï¡£";
+	cout << "æ¼”ç¤ºå®Œæ¯•ã€‚";
 	system("pause");
 	return 0;
 }
