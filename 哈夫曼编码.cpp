@@ -101,7 +101,7 @@ string Encode(string aPlaneText, const vector<string> &aCodes)
     string aEncodedText;
     for (char ch : aPlaneText)
     {
-        aEncodedText += aCodes[ch - 'a']; // 这里假定字符为a~xxxx，且没有考虑出现非法字符的情况
+        aEncodedText += aCodes[ch - 'a']; // 这里假定字符为a~e，且没有考虑出现非法字符的情况
     }
     return aEncodedText;
 }
@@ -110,12 +110,12 @@ string Decode(string aEncodedText, HuffmanTree &T)
 {
     string aDecodedText;
     int i = T.leafnumber + T.leafnumber - 2; // 指向根结点
-    for(char ch : aEncodedText)
+    for (char ch : aEncodedText)
     {
         i = ch == '0' ? T.nodes[i].lchild : T.nodes[i].rchild;
         if (i < T.leafnumber)
         {
-            aDecodedText += 'a' + i;
+            aDecodedText += 'a' + i; // 假设对应字符为a~e
             i = T.leafnumber + T.leafnumber - 2;
         }
     }
@@ -125,16 +125,17 @@ string Decode(string aEncodedText, HuffmanTree &T)
 int main()
 {
     HuffmanTree T;
-    int weights[] = {3, 7, 8, 6, 21};
+    int weights[] = {3, 7, 8, 6, 21}; // 假设对应字符为a~e
 
     cout << "创建哈夫曼树……" << endl;
     CreateHuffmanTree(T, 5, weights);
 
     cout << "创建哈夫曼编码……" << endl;
     vector<string> aCodes = CreateHuffmanCode(T);
-    for (auto aCode : aCodes)
+    for (int i = 0; i < aCodes.size(); i++)
     {
-        cout << aCode << endl;
+        // 假设字符为a~e
+        cout << (char)('a' + i) << ": " << aCodes[i] << endl;
     }
 
     string aPlaneText{"abaeecdabec"};
@@ -142,7 +143,7 @@ int main()
     string aEncodedText = Encode(aPlaneText, aCodes);
     cout << aPlaneText << " 编码结果为 " << aEncodedText << endl;
 
-    cout << "对 " << aEncodedText << " 解码……" << endl;
+    cout << "对 " << aEncodedText << " 进行解码……" << endl;
     string aDecodedText = Decode(aEncodedText, T);
     cout << aEncodedText << " 解码结果为 " << aDecodedText << endl;
 
