@@ -1,14 +1,13 @@
-#include <iostream>
+ï»¿#include <iostream>
 #include <algorithm>
 using namespace std;
 
 struct HuffmanNode
 {
-	char info;
 	int weight;
 	int parent, lchild, rchild;
 };
-// ¶¨Òå½áµãµÄÅÅĞò¹æÔò£¬sortËã·¨ĞèÒªÊ¹ÓÃÕâ¸öÖØÔØµÄÔËËã·û
+// å®šä¹‰ç»“ç‚¹çš„æ’åºè§„åˆ™ï¼Œsortç®—æ³•éœ€è¦ä½¿ç”¨è¿™ä¸ªé‡è½½çš„è¿ç®—ç¬¦
 bool operator<(const HuffmanNode &node1, const HuffmanNode &node2)
 {
 	return node1.weight < node2.weight;
@@ -22,40 +21,39 @@ struct HuffmanTree
 
 int CreateHuffmanTree(HuffmanTree &T, int leafnumber, int *weights)
 {
-	// ·ÖÅä¹ş·òÂüÊ÷´æ´¢¿Õ¼ä
+	// åˆ†é…å“ˆå¤«æ›¼æ ‘å­˜å‚¨ç©ºé—´
 	T.nodes = new HuffmanNode[leafnumber + leafnumber - 1];
 	T.leafnumber = leafnumber;
 
-	// ³õÊ¼»¯Ò¶½áµã
+	// åˆå§‹åŒ–å¶ç»“ç‚¹
 	for (int i = 0; i < leafnumber; i++)
 	{
-		T.nodes[i].info = 'a' + i;
 		T.nodes[i].weight = weights[i];
 		T.nodes[i].parent = T.nodes[i].lchild = T.nodes[i].rchild = -1;
 	}
 	
-	// ½«Ò¶½áµã°´È¨ÖµÅÅĞò
+	// å°†å¶ç»“ç‚¹æŒ‰æƒå€¼æ’åº
 	sort(T.nodes, T.nodes + leafnumber);
 	
-	// ¿ªÊ¼¹¹Ôì¹ş·òÂüÊ÷
-	int s = 0, t = leafnumber; // ·Ö±ğÓÃÀ´±éÀúÒ¶½áµãºÍ·ÇÒ¶½áµã
+	// å¼€å§‹æ„é€ å“ˆå¤«æ›¼æ ‘
+	int s = 0, t = leafnumber; // åˆ†åˆ«ç”¨æ¥éå†å¶ç»“ç‚¹å’Œéå¶ç»“ç‚¹
 	for (int i = 0; i < leafnumber - 1; i++)
 	{
-		// Ñ¡ÔñµÚÒ»¸öÈ¨Öµ×îĞ¡µÄ¸ù½áµã
+		// é€‰æ‹©ç¬¬ä¸€ä¸ªæƒå€¼æœ€å°çš„æ ¹ç»“ç‚¹
 		int k1;
 		if (s < leafnumber && (t >= leafnumber + i || T.nodes[s].weight < T.nodes[t].weight))
 			k1 = s++;
 		else
 			k1 = t++;
 		
-		// Ñ¡ÔñµÚ¶ş¸öÈ¨Öµ×îĞ¡µÄ¸ù½áµã
+		// é€‰æ‹©ç¬¬äºŒä¸ªæƒå€¼æœ€å°çš„æ ¹ç»“ç‚¹
 		int k2;
 		if (s < leafnumber && (t >= leafnumber + i || T.nodes[s].weight < T.nodes[t].weight))
 			k2 = s++;
 		else
 			k2 = t++;
 
-		// ½«¸ù½áµãk1, ¸ù½áµãk2ºÏ²¢µ½ĞÂÔö¸ù½áµãi + leafnumberÏÂ
+		// å°†æ ¹ç»“ç‚¹k1, æ ¹ç»“ç‚¹k2åˆå¹¶åˆ°æ–°å¢æ ¹ç»“ç‚¹i + leafnumberä¸‹
 		T.nodes[i + leafnumber].weight = T.nodes[k1].weight + T.nodes[k2].weight;
 		T.nodes[i + leafnumber].parent = -1;
 		T.nodes[i + leafnumber].lchild = k1;
@@ -65,6 +63,14 @@ int CreateHuffmanTree(HuffmanTree &T, int leafnumber, int *weights)
 	}
 
 	return 0;
+}
+
+int DestroyHuffmanTree(HuffmanTree &T)
+{
+    delete[] T.nodes;
+    T.nodes = nullptr;
+    T.leafnumber = 0;
+    return 0;
 }
 
 int main()
@@ -78,6 +84,7 @@ int main()
 		cout << i << ":" << T.nodes[i].weight << ", " << T.nodes[i].parent << ", " << T.nodes[i].lchild << ", " << T.nodes[i].rchild << endl;
 	}
 
-	system("pause");
+    DestroyHuffmanTree(T);
+    system("pause");
 	return 0;
 }
