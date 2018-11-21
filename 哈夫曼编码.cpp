@@ -79,6 +79,7 @@ int DestroyHuffmanTree(HuffmanTree &T)
     return 0;
 }
 
+// 自底向上构造哈夫曼编码
 vector<string> CreateHuffmanCode(HuffmanTree &T)
 {
     vector<string> aCodes;
@@ -92,6 +93,36 @@ vector<string> CreateHuffmanCode(HuffmanTree &T)
         }
         aCodes.push_back(buffer + t);
     }
+    delete[] buffer;
+    return aCodes;
+}
+
+// 自顶向下构造哈夫曼编码的遍历过程，i表示当前结点的下标，j表示当前编码串的位置
+int _CreateHuffmanCode(vector<string> &aCodes, HuffmanTree &T, int i, char buffer[], int j)
+{
+    // 遍历到叶结点时生成一位编码
+    if (i < T.leafnumber)
+    {
+        buffer[j] = '\0';
+        aCodes[i] = buffer;
+        return 0;
+    }
+    // 遍历左子树
+    buffer[j] = '0';
+    _CreateHuffmanCode(aCodes, T, T.nodes[i].lchild, buffer, j + 1);
+    // 遍历右子树
+    buffer[j] = '1';
+    _CreateHuffmanCode(aCodes, T, T.nodes[i].rchild, buffer, j + 1);
+    return 0;
+}
+
+// 自顶向下构造哈夫曼编码主过程
+vector<string> CreateHuffmanCode2(HuffmanTree &T)
+{
+    vector<string> aCodes(T.leafnumber);
+    char *buffer = new char[T.leafnumber]{};
+    // 从哈夫曼树的根结点开始遍历
+    _CreateHuffmanCode(aCodes, T, T.leafnumber + T.leafnumber - 2, buffer, 0);
     delete[] buffer;
     return aCodes;
 }
@@ -130,7 +161,15 @@ int main()
     cout << "创建哈夫曼树……" << endl;
     CreateHuffmanTree(T, 5, weights);
 
-    cout << "创建哈夫曼编码……" << endl;
+    cout << "自顶向下创建哈夫曼编码……" << endl;
+    vector<string> aCodes0 = CreateHuffmanCode2(T);
+    for (int i = 0; i < aCodes0.size(); i++)
+    {
+        // 假设字符为a~e
+        cout << (char)('a' + i) << ": " << aCodes0[i] << endl;
+    }
+
+    cout << "自底向上创建哈夫曼编码……" << endl;
     vector<string> aCodes = CreateHuffmanCode(T);
     for (int i = 0; i < aCodes.size(); i++)
     {
