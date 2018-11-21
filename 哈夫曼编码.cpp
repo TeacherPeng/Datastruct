@@ -82,16 +82,19 @@ int DestroyHuffmanTree(HuffmanTree &T)
 // 自底向上构造哈夫曼编码
 vector<string> CreateHuffmanCode(HuffmanTree &T)
 {
-    vector<string> aCodes;
+    vector<string> aCodes(T.leafnumber);
     char *buffer = new char[T.leafnumber]{};
+    // 依次从每一个叶结点循父链(parent)寻根
     for (int i = 0; i < T.leafnumber; i++)
     {
+        // t是编码记录指针，从buffer的尾部开始从后向前记录
         int t = T.leafnumber - 1;
         for (int j = i, k = T.nodes[i].parent; k >= 0; j = k, k = T.nodes[k].parent)
         {
             buffer[--t] = (j == T.nodes[k].lchild ? '0' : '1');
         }
-        aCodes.push_back(buffer + t);
+        // 到达根结点后，将得到的编码存入aCodes中
+        aCodes[i] = buffer + t;
     }
     delete[] buffer;
     return aCodes;
@@ -100,7 +103,7 @@ vector<string> CreateHuffmanCode(HuffmanTree &T)
 // 自顶向下构造哈夫曼编码的遍历过程，i表示当前结点的下标，j表示当前编码串的位置
 int _CreateHuffmanCode(vector<string> &aCodes, HuffmanTree &T, int i, char buffer[], int j)
 {
-    // 遍历到叶结点时生成一位编码
+    // 遍历到叶结点时即得到该叶结点的编码，将编码存入aCodes中
     if (i < T.leafnumber)
     {
         buffer[j] = '\0';
