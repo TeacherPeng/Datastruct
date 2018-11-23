@@ -4,7 +4,8 @@ using namespace std;
 
 struct HuffmanNode
 {
-	int weight;
+    int index;
+    int weight;
 	int parent, lchild, rchild;
 };
 // 定义结点的排序规则，sort算法需要使用这个重载的运算符
@@ -28,7 +29,8 @@ int CreateHuffmanTree(HuffmanTree &T, int leafnumber, int *weights)
 	// 初始化叶结点
 	for (int i = 0; i < leafnumber; i++)
 	{
-		T.nodes[i].weight = weights[i];
+        T.nodes[i].index = i;
+        T.nodes[i].weight = weights[i];
 		T.nodes[i].parent = T.nodes[i].lchild = T.nodes[i].rchild = -1;
 	}
 	
@@ -77,7 +79,7 @@ int main()
 {
 	HuffmanTree T;
 	int weights[] = { 3, 7, 8, 6, 21 };
-	CreateHuffmanTree(T, 5, weights);
+	CreateHuffmanTree(T, sizeof(weights)/sizeof(*weights), weights);
 
 	for (int i = 0; i < T.leafnumber + T.leafnumber - 1; i++)
 	{
