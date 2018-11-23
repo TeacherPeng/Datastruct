@@ -1,25 +1,25 @@
-#include <iostream>
+ï»¿#include <iostream>
 #include <string>
 #include <climits>
 #include <stack>
 using namespace std;
 
-// »¡½áµã¶¨Òå
+// å¼§ç»“ç‚¹å®šä¹‰
 struct ArcNode
 {
-	int weight;		// »¡ÉÏµÄĞÅÏ¢²¿·Ö
-	int adj;		// ÁÚ½ÓµãµÄĞòºÅ
+	int weight;		// å¼§ä¸Šçš„ä¿¡æ¯éƒ¨åˆ†
+	int adj;		// é‚»æ¥ç‚¹çš„åºå·
 	ArcNode *nextarc;
 };
 
-// ¶¥µã½áµã¶¨Òå 
+// é¡¶ç‚¹ç»“ç‚¹å®šä¹‰ 
 struct VexNode
 {
-	string info;		// ¶¥µãÉÏµÄĞÅÏ¢²¿·Ö
-	ArcNode *firstarc;	// »¡Á´Í·Ö¸Õë
+	string info;		// é¡¶ç‚¹ä¸Šçš„ä¿¡æ¯éƒ¨åˆ†
+	ArcNode *firstarc;	// å¼§é“¾å¤´æŒ‡é’ˆ
 };
 
-// ÁÚ½Ó±í½á¹¹µÄÍ¼µÄ¶¨Òå
+// é‚»æ¥è¡¨ç»“æ„çš„å›¾çš„å®šä¹‰
 struct Graph
 {
 	VexNode *vexes;
@@ -74,7 +74,7 @@ int CreateDemoGraph(Graph &G)
 
 int Dijkstra(Graph &G, int v0, int Path[])
 {
-	// ´´½¨²¢³õÊ¼»¯shortestÏòÁ¿¡¢UÏòÁ¿ºÍPathÏòÁ¿
+	// åˆ›å»ºå¹¶åˆå§‹åŒ–shortestå‘é‡ã€Uå‘é‡å’ŒPathå‘é‡
 	int *shortest = new int[G.vexnumber];
 	int *U = new int[G.vexnumber];
 	for (int i = 0; i < G.vexnumber; i++)
@@ -90,19 +90,19 @@ int Dijkstra(Graph &G, int v0, int Path[])
 		Path[p->adj] = v0;
 	}
 
-	// ¿ªÊ¼¼ÆËã
+	// å¼€å§‹è®¡ç®—
 	for (int i = 0; i < G.vexnumber - 1; i++)
 	{
-		// ÕÒ³ö²»ÔÚUÖĞµÄshortest×îĞ¡µÄ¶¥µãVk
+		// æ‰¾å‡ºä¸åœ¨Uä¸­çš„shortestæœ€å°çš„é¡¶ç‚¹Vk
 		int k = -1;
 		for (int j = 0; j < G.vexnumber; j++)
 			if (!U[j] && (k < 0 || shortest[j] < shortest[k])) k = j;
 		if (shortest[k] == INT_MAX) break;
 
-		// ½«Vk²¢ÈëUÖĞ
+		// å°†Vkå¹¶å…¥Uä¸­
 		U[k] = 1;
 
-		// ĞŞÕıVkµÄÁÚ½ÓµãµÄshortestºÍPath
+		// ä¿®æ­£Vkçš„é‚»æ¥ç‚¹çš„shortestå’ŒPath
 		for (ArcNode *p = G.vexes[k].firstarc; p != NULL; p = p->nextarc)
 		{
 			if (!U[p->adj] && shortest[k] + p->weight < shortest[p->adj])

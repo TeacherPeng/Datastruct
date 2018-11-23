@@ -1,25 +1,25 @@
-#include <iostream>
+ï»¿#include <iostream>
 #include <string>
 #include <climits>
 #include <stack>
 using namespace std;
 
-// »¡½áµã¶¨Òå
+// å¼§ç»“ç‚¹å®šä¹‰
 struct ArcNode
 {
-	int weight;		// »¡ÉÏµÄĞÅÏ¢²¿·Ö
-	int adj;		// ÁÚ½ÓµãµÄĞòºÅ
+	int weight;		// å¼§ä¸Šçš„ä¿¡æ¯éƒ¨åˆ†
+	int adj;		// é‚»æ¥ç‚¹çš„åºå·
 	ArcNode *nextarc;
 };
 
-// ¶¥µã½áµã¶¨Òå 
+// é¡¶ç‚¹ç»“ç‚¹å®šä¹‰ 
 struct VexNode
 {
-	string info;		// ¶¥µãÉÏµÄĞÅÏ¢²¿·Ö
-	ArcNode *firstarc;	// »¡Á´Í·Ö¸Õë
+	string info;		// é¡¶ç‚¹ä¸Šçš„ä¿¡æ¯éƒ¨åˆ†
+	ArcNode *firstarc;	// å¼§é“¾å¤´æŒ‡é’ˆ
 };
 
-// ÁÚ½Ó±í½á¹¹µÄÍ¼µÄ¶¨Òå
+// é‚»æ¥è¡¨ç»“æ„çš„å›¾çš„å®šä¹‰
 struct Graph
 {
 	VexNode *vexes;
@@ -74,49 +74,49 @@ int CreateDemoGraph(Graph &G)
 
 int CriticalPath(Graph &G, int(*aCriticalArcs)[2])
 {
-	// Í³¼Æ¸÷¶¥µãÈë¶È
+	// ç»Ÿè®¡å„é¡¶ç‚¹å…¥åº¦
 	int *indegree = new int[G.vexnumber];
 	for (int i = 0; i < G.vexnumber; i++) indegree[i] = 0;
 	for (int i = 0; i < G.vexnumber; i++)
 		for (ArcNode *p = G.vexes[i].firstarc; p != NULL; p = p->nextarc)
 			indegree[p->adj]++;
 
-	// Èë¶ÈÎª0µÄ¶¥µãÈëÕ»
+	// å…¥åº¦ä¸º0çš„é¡¶ç‚¹å…¥æ ˆ
 	stack<int> s;
 	for (int i = 0; i < G.vexnumber; i++)
 		if (indegree[i] == 0) s.push(i);
 
-	// ÍØÆËÅÅĞò£¬²¢°´ÍØÆËĞò¼ÆËã¶¥µãµÄve
+	// æ‹“æ‰‘æ’åºï¼Œå¹¶æŒ‰æ‹“æ‰‘åºè®¡ç®—é¡¶ç‚¹çš„ve
 	int *ve = new int[G.vexnumber];
 	for (int i = 0; i < G.vexnumber; i++) ve[i] = 0;
-	stack<int> s2; // ÓÃÀ´¼ÇÂ¼ÍØÆËĞò
+	stack<int> s2; // ç”¨æ¥è®°å½•æ‹“æ‰‘åº
 	while (!s.empty())
 	{
-		// È¡³öÒ»¸ö¿ÉÅÅĞò¶¥µã£¬²¢¼ÇÂ¼µ½s2Õ»ÖĞ£¨ÓÃÓÚÉú³ÉÄæÍØÆËĞò£©
+		// å–å‡ºä¸€ä¸ªå¯æ’åºé¡¶ç‚¹ï¼Œå¹¶è®°å½•åˆ°s2æ ˆä¸­ï¼ˆç”¨äºç”Ÿæˆé€†æ‹“æ‰‘åºï¼‰
 		int i = s.top(); s.pop();
 		s2.push(i);
-		// ±éÀúViµÄËùÓĞÁÚ½Óµã
+		// éå†Viçš„æ‰€æœ‰é‚»æ¥ç‚¹
 		for (ArcNode *p = G.vexes[i].firstarc; p != NULL; p = p->nextarc)
 		{
-			// ½«ViµÄÁÚ½ÓµãVjÈë¶È¼õ1£¬¼õµ½0ÔòVjÈëÕ»µÈ´ıÍØÆËÅÅĞò
+			// å°†Viçš„é‚»æ¥ç‚¹Vjå…¥åº¦å‡1ï¼Œå‡åˆ°0åˆ™Vjå…¥æ ˆç­‰å¾…æ‹“æ‰‘æ’åº
 			int j = p->adj;
 			indegree[j]--;
 			if (indegree[j] == 0) s.push(p->adj);
 
-			// ĞŞÕıVjµÄveÖµ
+			// ä¿®æ­£Vjçš„veå€¼
 			if (ve[i] + p->weight > ve[j])
 				ve[j] = ve[i] + p->weight;
 		}
 	}
 
-	// °´ÄæÍØÆËĞò¼ÆËã¶¥µãµÄvl£¬ÖÕµãµÄveÖµ×÷ÎªvlµÄ³õÖµ
+	// æŒ‰é€†æ‹“æ‰‘åºè®¡ç®—é¡¶ç‚¹çš„vlï¼Œç»ˆç‚¹çš„veå€¼ä½œä¸ºvlçš„åˆå€¼
 	int *vl = new int[G.vexnumber];
 	int maxve = ve[s2.top()];
 	for (int i = 0; i < G.vexnumber; i++) vl[i] = maxve;
 	while (!s2.empty())
 	{
 		int i = s2.top(); s2.pop();
-		// ÓÃViµÄÁÚ½ÓµãÀ´ĞŞÕıViµÄvlÖµ
+		// ç”¨Viçš„é‚»æ¥ç‚¹æ¥ä¿®æ­£Viçš„vlå€¼
 		for (ArcNode *p = G.vexes[i].firstarc; p != NULL; p = p->nextarc)
 		{
 			int j = p->adj;
@@ -125,7 +125,7 @@ int CriticalPath(Graph &G, int(*aCriticalArcs)[2])
 		}
 	}
 
-	// ±éÀúËùÓĞµÄ»¡£¬¼ÆËã»¡µÄeºÍlÖµ£¬ÌôÑ¡¹Ø¼ü»¡£¨eºÍlÏàµÈµÄ»¡£©
+	// éå†æ‰€æœ‰çš„å¼§ï¼Œè®¡ç®—å¼§çš„eå’Œlå€¼ï¼ŒæŒ‘é€‰å…³é”®å¼§ï¼ˆeå’Œlç›¸ç­‰çš„å¼§ï¼‰
 	int count = 0;
 	for (int i = 0; i < G.vexnumber; i++)
 	{

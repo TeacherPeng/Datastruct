@@ -1,24 +1,24 @@
-#include <iostream>
+ï»¿#include <iostream>
 #include <string>
 #include <climits>
 using namespace std;
 
-// »¡½áµã¶¨Òå
+// å¼§ç»“ç‚¹å®šä¹‰
 struct ArcNode
 {
-	int weight;		// »¡ÉÏµÄĞÅÏ¢²¿·Ö
-	int adj;		// ÁÚ½ÓµãµÄĞòºÅ
+	int weight;		// å¼§ä¸Šçš„ä¿¡æ¯éƒ¨åˆ†
+	int adj;		// é‚»æ¥ç‚¹çš„åºå·
 	ArcNode *nextarc;
 };
 
-// ¶¥µã½áµã¶¨Òå 
+// é¡¶ç‚¹ç»“ç‚¹å®šä¹‰ 
 struct VexNode
 {
-	string info;		// ¶¥µãÉÏµÄĞÅÏ¢²¿·Ö
-	ArcNode *firstarc;	// »¡Á´Í·Ö¸Õë
+	string info;		// é¡¶ç‚¹ä¸Šçš„ä¿¡æ¯éƒ¨åˆ†
+	ArcNode *firstarc;	// å¼§é“¾å¤´æŒ‡é’ˆ
 };
 
-// ÁÚ½Ó±í½á¹¹µÄÍ¼µÄ¶¨Òå
+// é‚»æ¥è¡¨ç»“æ„çš„å›¾çš„å®šä¹‰
 struct Graph
 {
 	VexNode *vexes;
@@ -60,19 +60,19 @@ int InsertArc(Graph &G, int i, int j, int weight)
 }
 int CreateDemoGraph(Graph &G)
 {
-	// ³õÊ¼»¯Í¼´æ´¢½á¹¹
+	// åˆå§‹åŒ–å›¾å­˜å‚¨ç»“æ„
 	InitGraph(G, 7);
 	
-	// ³õÊ¼»¯¶¥µãĞÅÏ¢
-	string infos[] = { "¸ß¼Ò×¯", "Âí¼ÒºÓ×Ó", "¼ĞÆ¤¹µ", "²Ü¼Ò±¤", "¸ßÁ¼´å", "¹ıÉ½ÍÍ", "¼¯ÏÍ´å" };
+	// åˆå§‹åŒ–é¡¶ç‚¹ä¿¡æ¯
+	string infos[] = { "é«˜å®¶åº„", "é©¬å®¶æ²³å­", "å¤¹çš®æ²Ÿ", "æ›¹å®¶å ¡", "é«˜è‰¯æ‘", "è¿‡å±±å±¯", "é›†è´¤æ‘" };
 	for (int i = 0; i < G.vexnumber; i++)
 		G.vexes[i].info = infos[i];
 	
-	// ³õÊ¼»¯»¡ĞÅÏ¢
+	// åˆå§‹åŒ–å¼§ä¿¡æ¯
 	int arcs[][3] = { { 0, 1, 10 },{ 0, 2, 9 },{ 0, 3, 13 },{ 1, 3, 15 },{ 1, 4, 7 },{ 1, 6, 12 },{ 2, 3, 4 },{ 2, 5, 3 },{ 3, 5, 22 },{ 3, 6, 23 },{ 4, 6, 20 },{ 5, 6, 32 }, };
 	for (int i = 0; i < sizeof(arcs) / sizeof(*arcs); i++)
 	{
-		// ÎŞÏòÍ¼µÄ±ßÓÉÁ½Ìõ¶Ô³ÆµÄ»¡×é³É 
+		// æ— å‘å›¾çš„è¾¹ç”±ä¸¤æ¡å¯¹ç§°çš„å¼§ç»„æˆ 
 		InsertArc(G, arcs[i][0], arcs[i][1], arcs[i][2]);
 		InsertArc(G, arcs[i][1], arcs[i][0], arcs[i][2]);
 	}
@@ -81,28 +81,28 @@ int CreateDemoGraph(Graph &G)
 
 int Prim(Graph &G, int(*T)[2])
 {
-	// ³õÊ¼»¯UÏòÁ¿£¬U[i]±íÊ¾ViÊÇ·ñÔÚU¼¯ÖĞ£¬1±íÊ¾ÔÚ£¬0±íÊ¾²»ÔÚ
+	// åˆå§‹åŒ–Uå‘é‡ï¼ŒU[i]è¡¨ç¤ºViæ˜¯å¦åœ¨Ué›†ä¸­ï¼Œ1è¡¨ç¤ºåœ¨ï¼Œ0è¡¨ç¤ºä¸åœ¨
 	int *U = new int[G.vexnumber];
 	U[0] = 1;
 	for (int i = 1; i < G.vexnumber; i++) U[i] = 0;
 
-	// ³õÊ¼»¯costÏòÁ¿£¬cost[i]±íÊ¾Viµ½U¼¯µÄ×î¶Ì±ßµÄÈ¨Öµ
-	// ³õÊ¼Ê±£¬UÖĞÖ»ÓĞV0£¬Òò´Ëcost[i]¼´±ß<V0, Vi>µÄÈ¨Öµ
+	// åˆå§‹åŒ–costå‘é‡ï¼Œcost[i]è¡¨ç¤ºViåˆ°Ué›†çš„æœ€çŸ­è¾¹çš„æƒå€¼
+	// åˆå§‹æ—¶ï¼ŒUä¸­åªæœ‰V0ï¼Œå› æ­¤cost[i]å³è¾¹<V0, Vi>çš„æƒå€¼
 	int *cost = new int[G.vexnumber];
 	for (int i = 0; i < G.vexnumber; i++) cost[i] = INT_MAX;
 	for (ArcNode *p = G.vexes[0].firstarc; p != NULL; p = p->nextarc)
 		cost[p->adj] = p->weight;
 
-	// ³õÊ¼»¯adjÏòÁ¿£¬adj[i]±íÊ¾Viµ½U¼¯µÄ×î¶Ì±ßÔÚUÖĞµÄÁÚ½ÓµãµÄĞòºÅ
-	// ³õÊ¼Ê±£¬UÖĞÖ»ÓĞV0£¬Òò´Ëadj[i]Îª0
+	// åˆå§‹åŒ–adjå‘é‡ï¼Œadj[i]è¡¨ç¤ºViåˆ°Ué›†çš„æœ€çŸ­è¾¹åœ¨Uä¸­çš„é‚»æ¥ç‚¹çš„åºå·
+	// åˆå§‹æ—¶ï¼ŒUä¸­åªæœ‰V0ï¼Œå› æ­¤adj[i]ä¸º0
 	int *adj = new int[G.vexnumber];
 	for (int i = 0; i < G.vexnumber; i++)
 		adj[i] = 0;
 
-	// °´ÕÕMSTĞÔÖÊÌôÑ¡n-1Ìõ±ß
+	// æŒ‰ç…§MSTæ€§è´¨æŒ‘é€‰n-1æ¡è¾¹
 	for (int i = 0; i < G.vexnumber - 1; i++)
 	{
-		// ¼ìË÷V-UÖĞcost×îĞ¡µÄ¶¥µãk 
+		// æ£€ç´¢V-Uä¸­costæœ€å°çš„é¡¶ç‚¹k 
 		int k = -1;
 		for (int j = 0; j < G.vexnumber; j++)
 		{
@@ -110,16 +110,16 @@ int Prim(Graph &G, int(*T)[2])
 				k = j;
 		}
 
-		// ½«¶¥µãk²¢ÈëU¼¯
+		// å°†é¡¶ç‚¹kå¹¶å…¥Ué›†
 		U[k] = 1;
-		// ÊÕ¼¯Ò»Ìõ±ß<Vk, Vadj[k]>
+		// æ”¶é›†ä¸€æ¡è¾¹<Vk, Vadj[k]>
 		T[i][0] = k;
 		T[i][1] = adj[k];
 
-		// ĞŞÕıV-UÖĞÊ£Óà¶¥µãµÄcostºÍadj£¨Ö»ÓĞ¶¥µãkµÄÁÚ½ÓµãĞèÒª±»ĞŞÕı£© 
+		// ä¿®æ­£V-Uä¸­å‰©ä½™é¡¶ç‚¹çš„costå’Œadjï¼ˆåªæœ‰é¡¶ç‚¹kçš„é‚»æ¥ç‚¹éœ€è¦è¢«ä¿®æ­£ï¼‰ 
 		for (ArcNode *p = G.vexes[k].firstarc; p != NULL; p = p->nextarc)
 		{
-			// ¶Ô¶¥µãVj£¬¼ì²éĞÂ³öÏÖµÄ¿çUºÍV-UµÄ±ß<Vk, Vj>ÊÇ·ñ±ÈÔ­À´µÄ¿çUºÍV-UµÄ×î¶Ì±ß¸ü¶Ì
+			// å¯¹é¡¶ç‚¹Vjï¼Œæ£€æŸ¥æ–°å‡ºç°çš„è·¨Uå’ŒV-Uçš„è¾¹<Vk, Vj>æ˜¯å¦æ¯”åŸæ¥çš„è·¨Uå’ŒV-Uçš„æœ€çŸ­è¾¹æ›´çŸ­
 			int j = p->adj;
 			if (!U[j] && p->weight < cost[j])
 			{

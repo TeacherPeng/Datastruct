@@ -6,6 +6,7 @@ using namespace std;
 
 struct HuffmanNode
 {
+    int index;
     int weight;
     int parent, lchild, rchild;
 };
@@ -30,6 +31,7 @@ int CreateHuffmanTree(HuffmanTree &T, int leafnumber, int *weights)
     // 初始化叶结点
     for (int i = 0; i < leafnumber; i++)
     {
+        T.nodes[i].index = i;
         T.nodes[i].weight = weights[i];
         T.nodes[i].parent = T.nodes[i].lchild = T.nodes[i].rchild = -1;
     }
@@ -94,7 +96,7 @@ vector<string> CreateHuffmanCode(HuffmanTree &T)
             buffer[--t] = (j == T.nodes[k].lchild ? '0' : '1');
         }
         // 到达根结点后，将得到的编码存入aCodes中
-        aCodes[i] = buffer + t;
+        aCodes[T.nodes[i].index] = buffer + t;
     }
     delete[] buffer;
     return aCodes;
@@ -107,7 +109,7 @@ int _CreateHuffmanCode(vector<string> &aCodes, HuffmanTree &T, int i, char buffe
     if (i < T.leafnumber)
     {
         buffer[j] = '\0';
-        aCodes[i] = buffer;
+        aCodes[T.nodes[i].index] = buffer;
         return 0;
     }
     // 遍历左子树
@@ -149,7 +151,7 @@ string Decode(string aEncodedText, HuffmanTree &T)
         i = ch == '0' ? T.nodes[i].lchild : T.nodes[i].rchild;
         if (i < T.leafnumber)
         {
-            aDecodedText += 'a' + i; // 假设对应字符为a~e
+            aDecodedText += 'a' + T.nodes[i].index; // 假设对应字符为a~e
             i = T.leafnumber + T.leafnumber - 2;
         }
     }
@@ -159,10 +161,10 @@ string Decode(string aEncodedText, HuffmanTree &T)
 int main()
 {
     HuffmanTree T;
-    int weights[] = {3, 7, 8, 6, 21}; // 假设对应字符为a~e
+    int weights[] = {13, 7, 8, 6, 21, 3, 9, 2}; // 假设对应字符为a~e
 
     cout << "创建哈夫曼树……" << endl;
-    CreateHuffmanTree(T, 5, weights);
+    CreateHuffmanTree(T, sizeof(weights)/sizeof(*weights), weights);
 
     cout << "自顶向下创建哈夫曼编码……" << endl;
     vector<string> aCodes0 = CreateHuffmanCode2(T);
@@ -180,7 +182,7 @@ int main()
         cout << (char)('a' + i) << ": " << aCodes[i] << endl;
     }
 
-    string aPlaneText{"abaeecdabec"};
+    string aPlaneText{"ahfbaegecdafbec"};
     cout << "对 " << aPlaneText << " 进行编码……" << endl;
     string aEncodedText = Encode(aPlaneText, aCodes);
     cout << aPlaneText << " 编码结果为 " << aEncodedText << endl;

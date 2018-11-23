@@ -1,24 +1,24 @@
-#include <iostream>
+ï»¿#include <iostream>
 #include <string>
 #include <queue>
 using namespace std;
 
-// »¡½áµã¶¨Òå
+// å¼§ç»“ç‚¹å®šä¹‰
 struct ArcNode
 {
-	// TODO: »¡ÉÏµÄĞÅÏ¢²¿·Ö
-	int adj;		// ÁÚ½ÓµãµÄĞòºÅ
+	// TODO: å¼§ä¸Šçš„ä¿¡æ¯éƒ¨åˆ†
+	int adj;		// é‚»æ¥ç‚¹çš„åºå·
 	ArcNode *nextarc;
 };
 
-// ¶¥µã½áµã¶¨Òå 
+// é¡¶ç‚¹ç»“ç‚¹å®šä¹‰ 
 struct VexNode
 {
-	// TODO: ¶¥µãÉÏµÄĞÅÏ¢²¿·Ö
-	ArcNode *firstarc;	// »¡Á´Í·Ö¸Õë
+	// TODO: é¡¶ç‚¹ä¸Šçš„ä¿¡æ¯éƒ¨åˆ†
+	ArcNode *firstarc;	// å¼§é“¾å¤´æŒ‡é’ˆ
 };
 
-// ÁÚ½Ó±í½á¹¹µÄÍ¼µÄ¶¨Òå
+// é‚»æ¥è¡¨ç»“æ„çš„å›¾çš„å®šä¹‰
 struct Graph
 {
 	VexNode *vexes;
@@ -129,11 +129,11 @@ int main()
 	Graph G;
 	CreateDemoGraph(G);
 	
-	cout << "Éî¶È±éÀú£º";
+	cout << "æ·±åº¦éå†ï¼š";
 	DFSTraverse(G);
 	cout << endl;
 
-	cout << "¹ã¶È±éÀú£º";
+	cout << "å¹¿åº¦éå†ï¼š";
 	BFSTraverse(G);
 	cout << endl;
 

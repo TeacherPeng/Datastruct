@@ -1,25 +1,25 @@
-#include <iostream>
+ï»¿#include <iostream>
 #include <string>
 #include <climits>
 #include <stack>
 using namespace std;
 
-// »¡½áµã¶¨Òå
+// å¼§ç»“ç‚¹å®šä¹‰
 struct ArcNode
 {
-	int weight;		// »¡ÉÏµÄĞÅÏ¢²¿·Ö
-	int adj;		// ÁÚ½ÓµãµÄĞòºÅ
+	int weight;		// å¼§ä¸Šçš„ä¿¡æ¯éƒ¨åˆ†
+	int adj;		// é‚»æ¥ç‚¹çš„åºå·
 	ArcNode *nextarc;
 };
 
-// ¶¥µã½áµã¶¨Òå 
+// é¡¶ç‚¹ç»“ç‚¹å®šä¹‰ 
 struct VexNode
 {
-	string info;		// ¶¥µãÉÏµÄĞÅÏ¢²¿·Ö
-	ArcNode *firstarc;	// »¡Á´Í·Ö¸Õë
+	string info;		// é¡¶ç‚¹ä¸Šçš„ä¿¡æ¯éƒ¨åˆ†
+	ArcNode *firstarc;	// å¼§é“¾å¤´æŒ‡é’ˆ
 };
 
-// ÁÚ½Ó±í½á¹¹µÄÍ¼µÄ¶¨Òå
+// é‚»æ¥è¡¨ç»“æ„çš„å›¾çš„å®šä¹‰
 struct Graph
 {
 	VexNode *vexes;
@@ -74,13 +74,13 @@ int CreateDemoGraph(Graph &G)
 
 int Floyd(Graph &G, int **Path)
 {
-	// ´´½¨shortest¾ØÕó
+	// åˆ›å»ºshortestçŸ©é˜µ
 	int **shortest = new int*[G.vexnumber];
 	shortest[0] = new int[G.vexnumber * G.vexnumber];
 	for (int i = 1; i < G.vexnumber; i++)
 		shortest[i] = shortest[i - 1] + G.vexnumber;
 	
-	// ³õÊ¼»¯shortestºÍPath£¬¼´P(i, j, -)
+	// åˆå§‹åŒ–shortestå’ŒPathï¼Œå³P(i, j, -)
 	for (int i = 0; i < G.vexnumber; i++)
 		for (int j = 0; j < G.vexnumber; j++)
 		{
@@ -94,7 +94,7 @@ int Floyd(Graph &G, int **Path)
 			Path[i][p->adj] = i;
 		}
 
-	// µü´ú¼ÆËãP(i, j, k)
+	// è¿­ä»£è®¡ç®—P(i, j, k)
 	for (int k = 0; k < G.vexnumber; k++)
 		for (int i = 0; i < G.vexnumber; i++)
 			for (int j = 0; j < G.vexnumber; j++)

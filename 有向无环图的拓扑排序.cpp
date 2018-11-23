@@ -1,25 +1,25 @@
-#include <iostream>
+ï»¿#include <iostream>
 #include <string>
 #include <climits>
 #include <stack>
 using namespace std;
 
-// »¡½áµã¶¨Òå
+// å¼§ç»“ç‚¹å®šä¹‰
 struct ArcNode
 {
-	int weight;		// »¡ÉÏµÄĞÅÏ¢²¿·Ö
-	int adj;		// ÁÚ½ÓµãµÄĞòºÅ
+	int weight;		// å¼§ä¸Šçš„ä¿¡æ¯éƒ¨åˆ†
+	int adj;		// é‚»æ¥ç‚¹çš„åºå·
 	ArcNode *nextarc;
 };
 
-// ¶¥µã½áµã¶¨Òå 
+// é¡¶ç‚¹ç»“ç‚¹å®šä¹‰ 
 struct VexNode
 {
-	string info;		// ¶¥µãÉÏµÄĞÅÏ¢²¿·Ö
-	ArcNode *firstarc;	// »¡Á´Í·Ö¸Õë
+	string info;		// é¡¶ç‚¹ä¸Šçš„ä¿¡æ¯éƒ¨åˆ†
+	ArcNode *firstarc;	// å¼§é“¾å¤´æŒ‡é’ˆ
 };
 
-// ÁÚ½Ó±í½á¹¹µÄÍ¼µÄ¶¨Òå
+// é‚»æ¥è¡¨ç»“æ„çš„å›¾çš„å®šä¹‰
 struct Graph
 {
 	VexNode *vexes;
@@ -70,30 +70,30 @@ int CreateDemoGraph(Graph &G)
 	return 0;
 }
 
-// ÍØÆËÅÅĞò£¬ÅÅĞò³É¹¦·µ»Ø0£¬ÅÅĞòÊ§°Ü·µ»Ø1
+// æ‹“æ‰‘æ’åºï¼Œæ’åºæˆåŠŸè¿”å›0ï¼Œæ’åºå¤±è´¥è¿”å›1
 int Topology(Graph &G, int Topo[])
 {
-	// Í³¼Æ¸÷¶¥µãµÄÈë¶È
+	// ç»Ÿè®¡å„é¡¶ç‚¹çš„å…¥åº¦
 	int *indegree = new int[G.vexnumber];
 	for (int i = 0; i < G.vexnumber; i++) indegree[i] = 0;
 	for (int i = 0; i < G.vexnumber; i++)
 		for (ArcNode *p = G.vexes[i].firstarc; p != NULL; p = p->nextarc)
 			indegree[p->adj]++;
 
-	// Èë¶ÈÎª0µÄ¶¥µãÈëÕ»»ò¶Ó
+	// å…¥åº¦ä¸º0çš„é¡¶ç‚¹å…¥æ ˆæˆ–é˜Ÿ
 	stack<int> s;
 	for (int i = 0; i < G.vexnumber; i++)
 		if (indegree[i] == 0) s.push(i);
 
-	// Éú³ÉÍØÆËĞòÁĞ
+	// ç”Ÿæˆæ‹“æ‰‘åºåˆ—
 	int i = 0;
 	while (!s.empty())
 	{
-		// È¡³öÒ»¸ö¿ÉÅÅÈëÍØÆËĞòÁĞµÄ¶¥µãVj£¬ÅÅÈëÍØÆËĞòÁĞÖĞ
+		// å–å‡ºä¸€ä¸ªå¯æ’å…¥æ‹“æ‰‘åºåˆ—çš„é¡¶ç‚¹Vjï¼Œæ’å…¥æ‹“æ‰‘åºåˆ—ä¸­
 		int j = s.top(); s.pop();
 		Topo[i++] = j;
 
-		// ½«VjµÄÁÚ½ÓµãµÄÈë¶È¼õ1£¬¼õÎª0µÄÁÚ½ÓµãÈëÕ»
+		// å°†Vjçš„é‚»æ¥ç‚¹çš„å…¥åº¦å‡1ï¼Œå‡ä¸º0çš„é‚»æ¥ç‚¹å…¥æ ˆ
 		for (ArcNode *p = G.vexes[j].firstarc; p != NULL; p = p->nextarc)
 		{
 			indegree[p->adj]--;
@@ -113,7 +113,7 @@ int main()
 
 	int *Topo = new int[G.vexnumber];
 	if (Topology(G, Topo) != 0)
-		cout << "·¢ÏÖ»ØÂ·£¬²»ÊÇÓĞÏòÎŞ»·Í¼£¡" << endl;
+		cout << "å‘ç°å›è·¯ï¼Œä¸æ˜¯æœ‰å‘æ— ç¯å›¾ï¼" << endl;
 	else
 	{
 		cout << Topo[0];
