@@ -1,4 +1,6 @@
 ﻿#include <iostream>
+#include <vector>
+#include <utility>
 #include <string>
 #include <climits>
 #include <stack>
@@ -75,8 +77,8 @@ int CreateDemoGraph(Graph &G)
 int Dijkstra(Graph &G, int v0, int Path[])
 {
 	// 创建并初始化shortest向量、U向量和Path向量
-	int *shortest = new int[G.vexnumber];
-	int *U = new int[G.vexnumber];
+	vector<int> shortest(G.vexnumber);
+	vector<int> U(G.vexnumber);
 	for (int i = 0; i < G.vexnumber; i++)
 	{
 		shortest[i] = INT_MAX;
@@ -113,8 +115,6 @@ int Dijkstra(Graph &G, int v0, int Path[])
 		}
 	}
 
-	delete[]U;
-	delete[]shortest;
 	return 0;
 }
 
