@@ -1,4 +1,6 @@
-﻿#include <iostream>
+﻿// 演示如何使用命令行参数
+//
+#include <iostream>
 #include <cstring>
 using namespace std;
 

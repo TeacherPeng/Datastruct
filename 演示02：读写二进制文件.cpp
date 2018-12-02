@@ -1,4 +1,6 @@
-﻿#include <iostream>
+﻿// 演示如何使用基于字节的文件流
+// 
+#include <iostream>
 #include <fstream>
 using namespace std;
 

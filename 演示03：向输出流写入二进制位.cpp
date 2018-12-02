@@ -1,4 +1,6 @@
-﻿#include <iostream>
+﻿// 演示如何向输出流中写入二进制位
+//
+#include <iostream>
 #include <string>
 using namespace std;
 
