@@ -1,4 +1,5 @@
 ﻿#include <iostream>
+#include <vector>
 #include <string>
 #include <climits>
 #include <stack>
@@ -72,26 +73,30 @@ int CreateDemoGraph(Graph &G)
 	return 0;
 }
 
-int Floyd(Graph &G, int **Path)
+vector<vector<int>> Floyd(Graph &G)
 {
+    // 创建Path矩阵
+    vector<vector<int>> aPaths(G.vexnumber);
+    for (auto &r : aPaths)
+        r.resize(G.vexnumber);
+
 	// 创建shortest矩阵
-	int **shortest = new int*[G.vexnumber];
-	shortest[0] = new int[G.vexnumber * G.vexnumber];
-	for (int i = 1; i < G.vexnumber; i++)
-		shortest[i] = shortest[i - 1] + G.vexnumber;
+    vector<vector<int>> shortest(G.vexnumber);
+    for (auto &r : shortest)
+        r.resize(G.vexnumber);
 	
 	// 初始化shortest和Path，即P(i, j, -)
 	for (int i = 0; i < G.vexnumber; i++)
 		for (int j = 0; j < G.vexnumber; j++)
 		{
 			shortest[i][j] = INT_MAX;
-			Path[i][j] = -1;
+			aPaths[i][j] = -1;
 		}
 	for (int i = 0; i < G.vexnumber; i++)
 		for (ArcNode *p = G.vexes[i].firstarc; p != NULL; p = p->nextarc)
 		{
 			shortest[i][p->adj] = p->weight;
-			Path[i][p->adj] = i;
+			aPaths[i][p->adj] = i;
 		}
 
 	// 迭代计算P(i, j, k)
@@ -102,16 +107,14 @@ int Floyd(Graph &G, int **Path)
 				if (shortest[i][k] < INT_MAX && shortest[k][j] < INT_MAX && shortest[i][k] + shortest[k][j] < shortest[i][j])
 				{
 					shortest[i][j] = shortest[i][k] + shortest[k][j];
-					Path[i][j] = Path[k][j];
+					aPaths[i][j] = aPaths[k][j];
 				}
 			}
 
-	delete[]shortest[0];
-	delete[]shortest;
-	return 0;
+	return aPaths;
 }
 
-int OutputPath(int **Path, int aStart, int aEnd)
+int OutputPath(vector<vector<int>> &Path, int aStart, int aEnd)
 {
 	if (aStart == aEnd)
 		cout << aStart;
@@ -128,12 +131,7 @@ int main()
 	Graph G;
 	CreateDemoGraph(G);
 
-	int **Path = new int*[G.vexnumber];
-	Path[0] = new int[G.vexnumber * G.vexnumber];
-	for (int i = 1; i < G.vexnumber; i++)
-		Path[i] = Path[i - 1] + G.vexnumber;
-
-	Floyd(G, Path);
+	vector<vector<int>> Path = Floyd(G);
 
 	for (int i = 0; i < G.vexnumber; i++)
 		for (int j = 0; j < G.vexnumber; j++)
@@ -144,8 +142,6 @@ int main()
 		}
 
 	DestroyGraph(G);
-	delete[]Path[0];
-	delete[]Path;
 	system("pause");
 	return 0;
 }

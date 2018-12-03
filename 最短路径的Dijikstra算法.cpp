@@ -74,22 +74,23 @@ int CreateDemoGraph(Graph &G)
 	return 0;
 }
 
-int Dijkstra(Graph &G, int v0, int Path[])
+vector<int> Dijkstra(Graph &G, int v0)
 {
-	// 创建并初始化shortest向量、U向量和Path向量
+    vector<int> aPaths(G.vexnumber);
+    // 创建并初始化shortest向量、U向量和Path向量
 	vector<int> shortest(G.vexnumber);
 	vector<int> U(G.vexnumber);
 	for (int i = 0; i < G.vexnumber; i++)
 	{
 		shortest[i] = INT_MAX;
-		Path[i] = -1;
+		aPaths[i] = -1;
 		U[i] = 0;
 	}
 	U[v0] = 1;
 	for (ArcNode *p = G.vexes[v0].firstarc; p != NULL; p = p->nextarc)
 	{
 		shortest[p->adj] = p->weight;
-		Path[p->adj] = v0;
+		aPaths[p->adj] = v0;
 	}
 
 	// 开始计算
@@ -110,21 +111,21 @@ int Dijkstra(Graph &G, int v0, int Path[])
 			if (!U[p->adj] && shortest[k] + p->weight < shortest[p->adj])
 			{
 				shortest[p->adj] = shortest[k] + p->weight;
-				Path[p->adj] = k;
+				aPaths[p->adj] = k;
 			}
 		}
 	}
 
-	return 0;
+	return aPaths;
 }
 
-int OutputPath(int Path[], int v0, int aEnd)
+int OutputPath(const vector<int> &aPaths, int v0, int aEnd)
 {
 	if (aEnd == v0)
 		cout << v0;
 	else
 	{
-		OutputPath(Path, v0, Path[aEnd]);
+		OutputPath(aPaths, v0, aPaths[aEnd]);
 		cout << " -> " << aEnd;
 	}
 	return 0;
@@ -135,18 +136,16 @@ int main()
 	Graph G;
 	CreateDemoGraph(G);
 
-	int *Path = new int[G.vexnumber];
-	Dijkstra(G, 0, Path);
+	vector<int> aPaths = Dijkstra(G, 0);
 
 	for (int i = 1; i < G.vexnumber; i++)
 	{
-		if (Path[i] < 0) continue;
-		OutputPath(Path, 0, i);
+		if (aPaths[i] < 0) continue;
+		OutputPath(aPaths, 0, i);
 		cout << endl;
 	}
 
 	DestroyGraph(G);
-	delete[]Path;
 	system("pause");
 	return 0;
 }
