@@ -122,6 +122,87 @@ int HeapSort(int L[], int n)
 	return 0;
 }
 
+// 将两个有序序列A和B归并到C中
+int Merge(int C[], int A[], int nA, int B[], int nB)
+{
+    int iA = 0, iB = 0, iC = 0;
+    while (iA < nA && iB < nB)
+    {
+        if (A[iA] < B[iB])
+        {
+            C[iC] = A[iA];
+            iA++;
+        }
+        else
+        {
+            C[iC] = B[iB];
+            iB++;
+        }
+        iC++;
+    }
+    while (iA < nA)
+    {
+        C[iC] = A[iA];
+        iA++;
+        iC++;
+    }
+    while (iB < nB)
+    {
+        C[iC] = B[iB];
+        iB++;
+        iC++;
+    }
+    return 0;
+}
+
+int Copy(int C[], int A[], int n)
+{
+    for (int i = 0; i < n; i++)
+        C[i] = A[i];
+    return 0;
+}
+
+// 归并排序
+int MergeSort(int L[], int n)
+{
+    // 分配一个用于归并的中间缓冲区
+    int *buffer = new int[n];
+
+    // 定义用于确定归并方向的源和目标指针
+    int *src = L, *dest = buffer;
+
+    // 待归并子序列长度从1递增到n
+    for (int m = 1; m < n; m += m)
+    {
+        int s, t;
+        // 归并相邻子序列，s为第一段起始下标，t为第二段起始下标
+        for (s = 0, t = m; t < n; s += m + m, t = s + m)
+        {
+            // 归并
+            Merge(dest + s, src + s, m, src + t, t + m <= n ? m : n - t);
+        }
+
+        // 复制剩余部分
+        if (s < n)
+        {
+            Copy(dest + s, src + s, n - s);
+        }
+
+        // 交换归并方向
+        swap(src, dest);
+        OutputSequence(src, n);
+    }
+
+    // 检查结果是否在中间缓冲区中
+    if (src != L)
+    {
+        Copy(L, src, n);
+    }
+
+    delete[] buffer;
+    return 0;
+}
+
 // 创建取值范围1~n的随机序列，扰动次数为m
 int CreateRandSequence(int L[], int n, int m)
 {
@@ -161,7 +242,12 @@ int main()
 	OutputSequence(L, n);
 	HeapSort(L, n);
 
-	delete[]L;
+    cout << "\n归并排序法过程：" << endl;
+    memcpy(L, L0, n * sizeof(int));
+    OutputSequence(L, n);
+    MergeSort(L, n);
+    
+    delete[]L;
 	delete[]L0;
 	cout << "演示完毕。";
 	system("pause");
