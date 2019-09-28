@@ -212,7 +212,7 @@ int OutputSequence(const char *title, int L[], int n)
 
 int main()
 {
-    srand((unsigned int)time(NULL));
+    srand((unsigned int)time(nullptr));
     int *L0, *L;
     int n = 16, m = 20;
     L0 = new int[n];

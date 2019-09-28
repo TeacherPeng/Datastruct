@@ -19,7 +19,7 @@ struct BiNode
 typedef BiNode *BiTree;
 int DestroyBiTree(BiTree &T)
 {
-    if (T == NULL)
+    if (T == nullptr)
         return 0;
     DestroyBiTree(T->lchild);
     DestroyBiTree(T->rchild);
@@ -45,7 +45,7 @@ const char *CreateBiTree(BiTree &T, const char *s)
 }
 int PreBiTree(BiTree T)
 {
-    if (T == NULL)
+    if (T == nullptr)
         return 1;
     cout << T->data;
     PreBiTree(T->lchild);
@@ -54,7 +54,7 @@ int PreBiTree(BiTree T)
 }
 int InBiTree(BiTree T)
 {
-    if (T == NULL)
+    if (T == nullptr)
         return 1;
     InBiTree(T->lchild);
     cout << T->data;
@@ -63,7 +63,7 @@ int InBiTree(BiTree T)
 }
 int SucBiTree(BiTree T)
 {
-    if (T == NULL)
+    if (T == nullptr)
         return 1;
     SucBiTree(T->lchild);
     SucBiTree(T->rchild);

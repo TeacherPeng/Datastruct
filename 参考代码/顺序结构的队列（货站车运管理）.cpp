@@ -1,15 +1,15 @@
 #include <iostream>
 using namespace std;
 
-// ÓÃË³Ðò½á¹¹ÊµÏÖ¶ÓÁÐ£¬Êý¾ÝÔªËØÎª»õ³µ±àºÅ
+// ï¿½ï¿½Ë³ï¿½ï¿½á¹¹Êµï¿½Ö¶ï¿½ï¿½Ð£ï¿½ï¿½ï¿½ï¿½ï¿½Ôªï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 struct Queue
 {
 	int *datas;
 	int bufferlen;
-	int head, tail; // headÎª³ö¶Ó¶Ë£¬tailÎªÈë¶Ó¶Ë 
+	int head, tail; // headÎªï¿½ï¿½ï¿½Ó¶Ë£ï¿½tailÎªï¿½ï¿½Ó¶ï¿½ 
 };
 
-// ³õÊ¼»¯
+// ï¿½ï¿½Ê¼ï¿½ï¿½
 int InitQueue(Queue &Q, int n)
 {
 	Q.datas = new int[n];
@@ -18,17 +18,17 @@ int InitQueue(Queue &Q, int n)
 	return 0;
 }
 
-// ³·Ïú
+// ï¿½ï¿½ï¿½ï¿½
 int DestroyQueue(Queue &Q)
 {
 	delete[]Q.datas;
-	Q.datas = NULL;
+	Q.datas = nullptr;
 	Q.bufferlen = 0;
 	Q.head = Q.tail = 0;
 	return 0;
 }
 
-// ÅÐ¶Ï¶ÓÁÐÊÇ·ñÎª¿Õ
+// ï¿½Ð¶Ï¶ï¿½ï¿½ï¿½ï¿½Ç·ï¿½Îªï¿½ï¿½
 bool Empty(Queue &Q)
 {
 	return Q.head == Q.tail;
@@ -39,13 +39,13 @@ bool Full(Queue &Q)
 	return ((Q.tail + 1) % Q.bufferlen) == Q.head;
 }
 
-// ¶ÁÈ¡¶ÓÊ×ÔªËØ
+// ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½Ôªï¿½ï¿½
 int Top(Queue &Q)
 {
 	return Q.datas[Q.head];
 }
 
-// Èë¶Ó£¬Ô¼¶¨¶ÓÁÐÒÑÂú·µ»Ø1
+// ï¿½ï¿½Ó£ï¿½Ô¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½1
 int EnQueue(Queue &Q, int data)
 {
 	if (Full(Q)) return 1;
@@ -54,7 +54,7 @@ int EnQueue(Queue &Q, int data)
 	return 0;
 }
 
-// ³ö¶Ó£¬Ô¼¶¨¶ÓÁÐ¿ÕÊ±·µ»Ø1
+// ï¿½ï¿½ï¿½Ó£ï¿½Ô¼ï¿½ï¿½ï¿½ï¿½ï¿½Ð¿ï¿½Ê±ï¿½ï¿½ï¿½ï¿½1
 int DeQueue(Queue &Q)
 {
 	if (Empty(Q)) return 1;
@@ -62,13 +62,13 @@ int DeQueue(Queue &Q)
 	return 0;
 }
 
-// ²Ù×÷²Ëµ¥
+// ï¿½ï¿½ï¿½ï¿½ï¿½Ëµï¿½
 int ShowMenu()
 {
-	cout << "1. »õ³µÈë¿â" << endl;
-	cout << "2. »õ³µ³ö¿â" << endl;
-	cout << "0. ÍË³ö" << endl;
-	cout << "ÇëÑ¡Ôñ²Ù×÷£º";
+	cout << "1. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½" << endl;
+	cout << "2. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½" << endl;
+	cout << "0. ï¿½Ë³ï¿½" << endl;
+	cout << "ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
 
 	int op;
 	cin >> op;
@@ -86,29 +86,29 @@ int main()
 		{
 		case 1:
 		{
-			// »õ³µ½øÕ¾
+			// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Õ¾
 			int aNo;
-			cout << "ÇëÊäÈëÈë¿â»õ³µºÅ£º";
+			cout << "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å£ï¿½";
 			cin >> aNo;
 			if (EnQueue(Q, aNo) != 0)
-				cout << "Èë¿âÊ§°Ü£¡" << endl;
+				cout << "ï¿½ï¿½ï¿½Ê§ï¿½Ü£ï¿½" << endl;
 			else
-				cout << aNo << "ºÅ»õ³µÈë¿âÍê±Ï¡£" << endl;
-			cout << aNo << "ºÅ»õ³µÈë¿âÍê±Ï¡£" << endl;
+				cout << aNo << "ï¿½Å»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¡ï¿½" << endl;
+			cout << aNo << "ï¿½Å»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¡ï¿½" << endl;
 			break;
 		}
 		case 2:
 		{
-			// »õ³µ³öÕ¾
+			// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Õ¾
 			if (Empty(Q))
 			{
-				cout << "³µ¿âÀïÊÇ¿ÕµÄ£¬Ã»ÓÐ»õ³µ¿ÉÒÔ³ö¿âÁË¡£" << endl;
+				cout << "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç¿ÕµÄ£ï¿½Ã»ï¿½Ð»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô³ï¿½ï¿½ï¿½ï¿½Ë¡ï¿½" << endl;
 			}
 			else
 			{
 				int aNo = Top(Q);
 				DeQueue(Q);
-				cout << aNo << "ºÅ»õ³µ³ö¿â¡£" << endl;
+				cout << aNo << "ï¿½Å»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½â¡£" << endl;
 			}
 			break;
 		}

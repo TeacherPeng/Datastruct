@@ -21,7 +21,7 @@ struct BiNode
 typedef BiNode *BiTree;
 int DestroyBiTree(BiTree &T)
 {
-    if (T == NULL)
+    if (T == nullptr)
         return 0;
     DestroyBiTree(T->lchild);
     DestroyBiTree(T->rchild);
@@ -30,11 +30,11 @@ int DestroyBiTree(BiTree &T)
 }
 BiTree CreateBiTree(const char *nodes)
 {
-    BiTree T = NULL;
+    BiTree T = nullptr;
     for (const char *p = nodes; *p != '\0'; p++)
     {
         BiTree *tp = &T;
-        while (*tp != NULL)
+        while (*tp != nullptr)
         {
             if ((rand() % 2) == 0)
                 tp = &((*tp)->lchild);
@@ -43,13 +43,13 @@ BiTree CreateBiTree(const char *nodes)
         }
         *tp = new BiNode;
         (*tp)->data = *p;
-        (*tp)->lchild = (*tp)->rchild = NULL;
+        (*tp)->lchild = (*tp)->rchild = nullptr;
     }
     return T;
 }
 int VPreTraverse(BiTree T)
 {
-    if (T == NULL)
+    if (T == nullptr)
     {
         cout << "#";
         return 1;
@@ -61,7 +61,7 @@ int VPreTraverse(BiTree T)
 }
 int PreTraverse(BiTree T)
 {
-    if (T == NULL)
+    if (T == nullptr)
         return 0;
     cout << T->data;
     PreTraverse(T->lchild);
@@ -88,7 +88,7 @@ int PreTraverse_Norecursion(BiTree T)
 }
 int InTraverse(BiTree T)
 {
-    if (T == NULL)
+    if (T == nullptr)
         return 0;
     InTraverse(T->lchild);
     cout << T->data;
@@ -118,7 +118,7 @@ int InTraverse_Norecursion(BiTree T)
 }
 int SucTraverse(BiTree T)
 {
-    if (T == NULL)
+    if (T == nullptr)
         return 0;
     SucTraverse(T->lchild);
     SucTraverse(T->rchild);
@@ -153,7 +153,7 @@ int SucTraverse_Norecursion(BiTree T)
 
 int main(int argc, char *args[])
 {
-    srand((unsigned int)time(NULL));
+    srand((unsigned int)time(nullptr));
     char defaultstr[] = "abcdefghijklmnopqrstuvwxyz0123456789";
     int n = (rand() % strlen(defaultstr)) + 1;
     char *s = defaultstr;

@@ -2,7 +2,7 @@
 #include <cstring>
 using namespace std;
 
-// Í¼ÊéÐÅÏ¢
+// Í¼ï¿½ï¿½ï¿½ï¿½Ï¢
 struct Book
 {
 	char name[1024];
@@ -10,15 +10,15 @@ struct Book
 	char code[20];
 };
 
-// Í¼ÊéÄ¿Â¼(ÒÔÍ¼ÊéÎªÊý¾ÝÏîµÄÏßÐÔ±í£©
+// Í¼ï¿½ï¿½Ä¿Â¼(ï¿½ï¿½Í¼ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô±ï¿½ï¿½ï¿½
 struct Books
 {
 	Book *data;
-	int bufferlen; // ×î¶à¿ÉÒÔ´æ´¢¶àÉÙ±¾Í¼ÊéµÄÐÅÏ¢¼ÇÂ¼
-	int tablelen;  // ÏÖÔÚÓÐ¶àÉÙ±¾Í¼ÊéµÄÐÅÏ¢¼ÇÂ¼
+	int bufferlen; // ï¿½ï¿½ï¿½ï¿½ï¿½Ô´æ´¢ï¿½ï¿½ï¿½Ù±ï¿½Í¼ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½Â¼
+	int tablelen;  // ï¿½ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½ï¿½Ù±ï¿½Í¼ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½Â¼
 };
 
-// ³õÊ¼»¯
+// ï¿½ï¿½Ê¼ï¿½ï¿½
 int InitLibrary(Books &aLib, int aBufferLen)
 {
 	aLib.data = new Book[aBufferLen];
@@ -27,53 +27,53 @@ int InitLibrary(Books &aLib, int aBufferLen)
 	return 0;
 }
 
-// ½«Ò»±¾Êé²åµ½Ä¿Â¼µÄÖ¸¶¨Î»ÖÃ
-// Ô¼¶¨Ö¸¶¨Î»ÖÃÈç¹û²»ºÏÀí£¬Ôò·µ»Ø1
-// Ô¼¶¨´æ´¢¿Õ¼äÈç¹ûÒÑÂú£¬Ôò·µ»Ø2
+// ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½åµ½Ä¿Â¼ï¿½ï¿½Ö¸ï¿½ï¿½Î»ï¿½ï¿½
+// Ô¼ï¿½ï¿½Ö¸ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ò·µ»ï¿½1
+// Ô¼ï¿½ï¿½ï¿½æ´¢ï¿½Õ¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ò·µ»ï¿½2
 int InsertBook(Books &aLib, Book aBook, int aIndex)
 {
-	// ¼ì²é²ÎÊýÊÇ·ñºÏÀí
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½
 	if (aIndex < 0 || aIndex > aLib.tablelen) return 1;
 
-	// ¼ì²é´æ´¢¿Õ¼äÊÇ·ñÓÐ¿ÕÓà¿ÉÓÃ¿Õ¼ä
+	// ï¿½ï¿½ï¿½æ´¢ï¿½Õ¼ï¿½ï¿½Ç·ï¿½ï¿½Ð¿ï¿½ï¿½ï¿½ï¿½ï¿½Ã¿Õ¼ï¿½
 	if (aLib.bufferlen <= aLib.tablelen) return 2;
 
-	// ½«²åÈëÎ»ÖÃµ½±íÎ²µÄ¼ÇÂ¼ÏòºóÒÆÒ»Î»£¬ÔÚ²åÈëÎ»ÖÃÌÚ³öÒ»¸ö¿ÕÎ»¡£
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½Ãµï¿½ï¿½ï¿½Î²ï¿½Ä¼ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½Ò»Î»ï¿½ï¿½ï¿½Ú²ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½Ú³ï¿½Ò»ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½
 	for (int i = aIndex; i < aLib.tablelen; i++)
 		for (int i = aLib.tablelen - 1; i >= aIndex; i--)
 		{
 			aLib.data[i + 1] = aLib.data[i];
 		}
 
-	// ½«ÐÂ¼ÇÂ¼ÌîÐ´ÔÚÌÚ³öµÄ¿ÕÎ»ÖÐ¡£
+	// ï¿½ï¿½ï¿½Â¼ï¿½Â¼ï¿½ï¿½Ð´ï¿½ï¿½ï¿½Ú³ï¿½ï¿½Ä¿ï¿½Î»ï¿½Ð¡ï¿½
 	aLib.data[aIndex] = aBook;
 
-	// ÐÞÕý¼ÇÂ¼¸öÊý
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½
 	aLib.tablelen++;
 
 	return 0;
 }
 
-// ´ÓÍ¼ÊéÄ¿Â¼ÖÐÉ¾³ýÖ¸¶¨Î»ÖÃµÄÍ¼Êé¼ÇÂ¼
-// Ô¼¶¨Ö¸¶¨Î»ÖÃÈç¹û²»ºÏÀí£¬Ôò·µ»Ø1
+// ï¿½ï¿½Í¼ï¿½ï¿½Ä¿Â¼ï¿½ï¿½É¾ï¿½ï¿½Ö¸ï¿½ï¿½Î»ï¿½Ãµï¿½Í¼ï¿½ï¿½ï¿½Â¼
+// Ô¼ï¿½ï¿½Ö¸ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ò·µ»ï¿½1
 int RemoveBook(Books &aLib, int aIndex)
 {
-	// ¼ì²é²ÎÊýÊÇ·ñºÏÀí
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½
 	if (aIndex < 0 || aIndex >= aLib.tablelen) return 1;
 
-	// ½«É¾³ýÎ»ÖÃºóÃæµÄËùÓÐ¼ÇÂ¼ÏòÇ°ÒÆÒ»Î»£¬¸²¸ÇÒªÉ¾³ýµÄ¼ÇÂ¼¡£
+	// ï¿½ï¿½É¾ï¿½ï¿½Î»ï¿½Ãºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¼ï¿½Â¼ï¿½ï¿½Ç°ï¿½ï¿½Ò»Î»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÒªÉ¾ï¿½ï¿½ï¿½Ä¼ï¿½Â¼ï¿½ï¿½
 	for (int i = aIndex + 1; i < aLib.tablelen; i++)
 	{
 		aLib.data[i - 1] = aLib.data[i];
 	}
 
-	// ÐÞÕý¼ÇÂ¼¸öÊý
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½
 	aLib.tablelen--;
 
 	return 0;
 }
 
-// ´òÓ¡Í¼ÊéÄ¿Â¼
+// ï¿½ï¿½Ó¡Í¼ï¿½ï¿½Ä¿Â¼
 int PrintBooks(Books &aLib)
 {
 	for (int i = 0; i < aLib.tablelen; i++)
@@ -85,10 +85,10 @@ int PrintBooks(Books &aLib)
 	return 0;
 }
 
-// °´ÊéÃû²éÕÒÍ¼Êé¼ÇÂ¼£¬Èç¹ûÕÒµ½£¬·µ»ØÐòºÅ£¨ÏÂ±ê£©£¬Èç¹ûÃ»ÓÐÕÒµ½£¬Ô¼¶¨·µ»Ø-1¡£
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å£ï¿½ï¿½Â±ê£©ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½Òµï¿½ï¿½ï¿½Ô¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½-1ï¿½ï¿½
 int FindBook(Books &aLib, char aName[])
 {
-	// Ë³Ðò±éÀú²éÕÒ
+	// Ë³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	for (int i = 0; i < aLib.tablelen; i++)
 	{
 		if (strcmp(aLib.data[i].name, aName) == 0)
@@ -97,11 +97,11 @@ int FindBook(Books &aLib, char aName[])
 	return -1;
 }
 
-// ³·Ïú
+// ï¿½ï¿½ï¿½ï¿½
 int DestroyLibrary(Books &aLib)
 {
 	delete[]aLib.data;
-	aLib.data = NULL;
+	aLib.data = nullptr;
 	aLib.bufferlen = 0;
 	aLib.tablelen = 0;
 	return 0;
@@ -109,12 +109,12 @@ int DestroyLibrary(Books &aLib)
 
 int ShowMenu()
 {
-	cout << "1. Ìí¼ÓÍ¼Êé" << endl;
-	cout << "2. °´ÊéÃûÉ¾³ýÍ¼Êé" << endl;
-	cout << "3. °´ÊéÃû²éÕÒÍ¼Êé" << endl;
-	cout << "4. ´òÓ¡Í¼ÊéÄ¿Â¼" << endl;
-	cout << "0. ÍË³ö" << endl;
-	cout << "ÇëÑ¡Ôñ£º";
+	cout << "1. ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½" << endl;
+	cout << "2. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É¾ï¿½ï¿½Í¼ï¿½ï¿½" << endl;
+	cout << "3. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½" << endl;
+	cout << "4. ï¿½ï¿½Ó¡Í¼ï¿½ï¿½Ä¿Â¼" << endl;
+	cout << "0. ï¿½Ë³ï¿½" << endl;
+	cout << "ï¿½ï¿½Ñ¡ï¿½ï¿½";
 
 	int op;
 	cin >> op;
@@ -133,41 +133,41 @@ int main()
 		{
 		case 1:
 		{
-			// Ìí¼ÓÍ¼Êé£¨²ÉÓÃ±ê×¼ÊäÈë£¬ÊéÃû¡¢×÷ÕßÃûºÍ±àÂëÖÐ²»ÄÜº¬ÓÐ¿Õ°×·û£©
+			// ï¿½ï¿½ï¿½ï¿½Í¼ï¿½é£¨ï¿½ï¿½ï¿½Ã±ï¿½×¼ï¿½ï¿½ï¿½ë£¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í±ï¿½ï¿½ï¿½ï¿½Ð²ï¿½ï¿½Üºï¿½ï¿½Ð¿Õ°×·ï¿½ï¿½ï¿½
 			Book aBook;
 			int aIndex;
-			cout << "ÇëÒÀ´ÎÊäÈë ÊéÃû ×÷Õß ±àÂë ²åÈëÎ»ÖÃ£º";
+			cout << "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Î»ï¿½Ã£ï¿½";
 			cin >> aBook.name >> aBook.author >> aBook.code >> aIndex;
 			if (InsertBook(lib, aBook, aIndex) == 0)
-				cout << "²åÈë¼ÇÂ¼³É¹¦£¡" << endl;
+				cout << "ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½É¹ï¿½ï¿½ï¿½" << endl;
 			else
-				cout << "²åÈë¼ÇÂ¼Ê§°Ü£¡" << endl;
+				cout << "ï¿½ï¿½ï¿½ï¿½ï¿½Â¼Ê§ï¿½Ü£ï¿½" << endl;
 			break;
 		}
 		case 2:
 		{
-			// °´ÊéÃûÉ¾³ýÍ¼Êé
+			// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É¾ï¿½ï¿½Í¼ï¿½ï¿½
 			char aName[1024];
-			cout << "ÇëÊäÈëÒªÉ¾³ýÍ¼ÊéµÄÊéÃû£º";
+			cout << "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÒªÉ¾ï¿½ï¿½Í¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
 			cin >> aName;
 			int aIndex = FindBook(lib, aName);
 			if (aIndex < 0)
-				cout << "Ã»ÓÐÕÒµ½ÏàÍ¬ÊéÃûµÄ¼ÇÂ¼£¡" << endl;
+				cout << "Ã»ï¿½ï¿½ï¿½Òµï¿½ï¿½ï¿½Í¬ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½Â¼ï¿½ï¿½" << endl;
 			else if (RemoveBook(lib, aIndex) == 0)
-				cout << "É¾³ýÍ¼Êé³É¹¦£¡" << endl;
+				cout << "É¾ï¿½ï¿½Í¼ï¿½ï¿½É¹ï¿½ï¿½ï¿½" << endl;
 			else
-				cout << "É¾³ýÍ¼ÊéÊ§°Ü£¡" << endl;
+				cout << "É¾ï¿½ï¿½Í¼ï¿½ï¿½Ê§ï¿½Ü£ï¿½" << endl;
 			break;
 		}
 		case 3:
 		{
-			// °´ÊéÃû²éÕÒÍ¼Êé
+			// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½
 			char aName[1024];
-			cout << "ÇëÊäÈëÒª²éÕÒµÄÍ¼ÊéµÄÊéÃû£º";
+			cout << "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½Òµï¿½Í¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
 			cin >> aName;
 			int aIndex = FindBook(lib, aName);
 			if (aIndex < 0)
-				cout << "Ã»ÓÐÕÒµ½ÏàÍ¬ÊéÃûµÄ¼ÇÂ¼£¡" << endl;
+				cout << "Ã»ï¿½ï¿½ï¿½Òµï¿½ï¿½ï¿½Í¬ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½Â¼ï¿½ï¿½" << endl;
 			else
 				cout << aIndex << ".\t"
 				<< lib.data[aIndex].name << "\t"
@@ -177,7 +177,7 @@ int main()
 		}
 		case 4:
 		{
-			// ´òÓ¡Í¼ÊéÄ¿Â¼
+			// ï¿½ï¿½Ó¡Í¼ï¿½ï¿½Ä¿Â¼
 			PrintBooks(lib);
 			break;
 		}

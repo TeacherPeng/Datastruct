@@ -43,8 +43,8 @@ int DestroyArray(Array &A)
 {
 	delete[]A.buffer;
 	delete[]A.dimlength;
-	A.buffer = NULL;
-	A.dimlength = NULL;
+	A.buffer = nullptr;
+	A.dimlength = nullptr;
 	A.dims = 0;
 	return 0;
 }

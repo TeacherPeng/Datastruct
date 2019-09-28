@@ -32,14 +32,14 @@ int InitGraph(Graph &G, int vexnumber)
     G.vexes = new VexNode[vexnumber];
     G.vexnumber = vexnumber;
     for (int i = 0; i < vexnumber; i++)
-        G.vexes[i].firstarc = NULL;
+        G.vexes[i].firstarc = nullptr;
     return 0;
 }
 int DestroyGraph(Graph &G)
 {
     for (int i = 0; i < G.vexnumber; i++)
     {
-        while (G.vexes[i].firstarc != NULL)
+        while (G.vexes[i].firstarc != nullptr)
         {
             ArcNode *p = G.vexes[i].firstarc;
             G.vexes[i].firstarc = p->nextarc;
@@ -47,7 +47,7 @@ int DestroyGraph(Graph &G)
         }
     }
     delete[] G.vexes;
-    G.vexes = NULL;
+    G.vexes = nullptr;
     G.vexnumber = 0;
     return 0;
 }
@@ -108,7 +108,7 @@ vector<pair<int, int>> Prim(Graph &G)
     vector<int> cost(G.vexnumber);
     for (int i = 0; i < G.vexnumber; i++)
         cost[i] = INT_MAX;
-    for (ArcNode *p = G.vexes[0].firstarc; p != NULL; p = p->nextarc)
+    for (ArcNode *p = G.vexes[0].firstarc; p != nullptr; p = p->nextarc)
         cost[p->adj] = p->weight;
 
     // 初始化adj向量，adj[i]表示Vi到U集的最短边在U中的邻接点的序号
@@ -134,7 +134,7 @@ vector<pair<int, int>> Prim(Graph &G)
         T.push_back(make_pair(k, adj[k]));
 
         // 修正V-U中剩余顶点的cost和adj（只有顶点k的邻接点需要被修正）
-        for (ArcNode *p = G.vexes[k].firstarc; p != NULL; p = p->nextarc)
+        for (ArcNode *p = G.vexes[k].firstarc; p != nullptr; p = p->nextarc)
         {
             // 对顶点Vj，检查新出现的跨U和V-U的边<Vk, Vj>是否比原来的跨U和V-U的最短边更短
             int j = p->adj;

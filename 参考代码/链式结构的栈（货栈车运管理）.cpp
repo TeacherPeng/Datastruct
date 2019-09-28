@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-// ÓÃÁ´Ê½½á¹¹ÊµÏÖÕ»£¬Êý¾ÝÔªËØÎª³µÏá±àºÅ
+// ï¿½ï¿½ï¿½ï¿½Ê½ï¿½á¹¹Êµï¿½ï¿½Õ»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ôªï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 struct StackNode
 {
 	int data;
@@ -9,53 +9,53 @@ struct StackNode
 };
 typedef StackNode *Stack;
 
-// ³õÊ¼»¯
+// ï¿½ï¿½Ê¼ï¿½ï¿½
 int InitStack(Stack &S)
 {
-	S = NULL;
+	S = nullptr;
 	return 0;
 }
 
-// ÅÐ¶ÏÕ»ÊÇ·ñÎª¿Õ
+// ï¿½Ð¶ï¿½Õ»ï¿½Ç·ï¿½Îªï¿½ï¿½
 bool Empty(Stack S)
 {
-	return S == NULL;
+	return S == nullptr;
 }
 
-// ¶ÁÈ¡Õ»¶¥ÔªËØ
+// ï¿½ï¿½È¡Õ»ï¿½ï¿½Ôªï¿½ï¿½
 int Top(Stack S)
 {
 	return S->data;
 }
 
-// ÈëÕ»
+// ï¿½ï¿½Õ»
 int Push(Stack &S, int data)
 {
-	// ´´½¨ÐÂ½áµã
+	// ï¿½ï¿½ï¿½ï¿½ï¿½Â½ï¿½ï¿½
 	StackNode *p = new StackNode;
 	p->data = data;
 
-	// ÈëÕ»
+	// ï¿½ï¿½Õ»
 	p->next = S;
 	S = p;
 
 	return 0;
 }
 
-// ³öÕ»£¬Ô¼¶¨Õ»¿ÕÊ±·µ»Ø1
+// ï¿½ï¿½Õ»ï¿½ï¿½Ô¼ï¿½ï¿½Õ»ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½1
 int Pop(Stack &S)
 {
 	if (Empty(S)) return 1;
-	// ÔÝ´æÕ»¶¥ÔªËØ
+	// ï¿½Ý´ï¿½Õ»ï¿½ï¿½Ôªï¿½ï¿½
 	StackNode *p = S;
-	// Õª³ýÕ»¶¥ÔªËØ
+	// Õªï¿½ï¿½Õ»ï¿½ï¿½Ôªï¿½ï¿½
 	S = S->next;
-	// É¾³ýÕªÏÂµÄÕ»¶¥ÔªËØ
+	// É¾ï¿½ï¿½Õªï¿½Âµï¿½Õ»ï¿½ï¿½Ôªï¿½ï¿½
 	delete p;
 	return 0;
 }
 
-// ³·Ïú
+// ï¿½ï¿½ï¿½ï¿½
 int DestroyStack(Stack &S)
 {
 	while (!Empty(S))
@@ -63,13 +63,13 @@ int DestroyStack(Stack &S)
 	return 0;
 }
 
-// ²Ù×÷²Ëµ¥
+// ï¿½ï¿½ï¿½ï¿½ï¿½Ëµï¿½
 int ShowMenu()
 {
-	cout << "1. ³µÏá½øÕ»" << endl;
-	cout << "2. ³µÏá³öÕ»" << endl;
-	cout << "0. ÍË³ö" << endl;
-	cout << "ÇëÑ¡Ôñ²Ù×÷£º";
+	cout << "1. ï¿½ï¿½ï¿½ï¿½ï¿½Õ»" << endl;
+	cout << "2. ï¿½ï¿½ï¿½ï¿½ï¿½Õ»" << endl;
+	cout << "0. ï¿½Ë³ï¿½" << endl;
+	cout << "ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
 
 	int op;
 	cin >> op;
@@ -87,29 +87,29 @@ int main()
 		{
 		case 1:
 		{
-			// ³µÏá½øÕ»
+			// ï¿½ï¿½ï¿½ï¿½ï¿½Õ»
 			int aNo;
-			cout << "ÇëÊäÈë½øÕ»³µÏáºÅ£º";
+			cout << "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Õ»ï¿½ï¿½ï¿½ï¿½Å£ï¿½";
 			cin >> aNo;
 			if (Push(S, aNo) != 0)
-				cout << "³µÏá½øÕ»Ê§°Ü£¡" << endl;
+				cout << "ï¿½ï¿½ï¿½ï¿½ï¿½Õ»Ê§ï¿½Ü£ï¿½" << endl;
 			else
-				cout << aNo << "ºÅ³µÏá½øÕ»Íê±Ï¡£" << endl;
-			cout << aNo << "ºÅ³µÏá½øÕ»Íê±Ï¡£" << endl;
+				cout << aNo << "ï¿½Å³ï¿½ï¿½ï¿½ï¿½Õ»ï¿½ï¿½Ï¡ï¿½" << endl;
+			cout << aNo << "ï¿½Å³ï¿½ï¿½ï¿½ï¿½Õ»ï¿½ï¿½Ï¡ï¿½" << endl;
 			break;
 		}
 		case 2:
 		{
-			// ³µÏá³öÕ»
+			// ï¿½ï¿½ï¿½ï¿½ï¿½Õ»
 			if (Empty(S))
 			{
-				cout << "»õÕ»ÀïÊÇ¿ÕµÄ£¬Ã»ÓÐ³µÏá¿ÉÒÔ³öÕ»ÁË¡£" << endl;
+				cout << "ï¿½ï¿½Õ»ï¿½ï¿½ï¿½Ç¿ÕµÄ£ï¿½Ã»ï¿½Ð³ï¿½ï¿½ï¿½ï¿½ï¿½Ô³ï¿½Õ»ï¿½Ë¡ï¿½" << endl;
 			}
 			else
 			{
 				int aNo = Top(S);
 				Pop(S);
-				cout << aNo << "ºÅ³µÏá³öÕ»¡£" << endl;
+				cout << aNo << "ï¿½Å³ï¿½ï¿½ï¿½ï¿½Õ»ï¿½ï¿½" << endl;
 			}
 			break;
 		}

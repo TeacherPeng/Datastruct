@@ -31,14 +31,14 @@ int InitGraph(Graph &G, int vexnumber)
 	G.vexes = new VexNode[vexnumber];
 	G.vexnumber = vexnumber;
 	for (int i = 0; i < vexnumber; i++)
-		G.vexes[i].firstarc = NULL;
+		G.vexes[i].firstarc = nullptr;
 	return 0;
 }
 int DestroyGraph(Graph &G)
 {
 	for (int i = 0; i < G.vexnumber; i++)
 	{
-		while (G.vexes[i].firstarc != NULL)
+		while (G.vexes[i].firstarc != nullptr)
 		{
 			ArcNode *p = G.vexes[i].firstarc;
 			G.vexes[i].firstarc = p->nextarc;
@@ -46,7 +46,7 @@ int DestroyGraph(Graph &G)
 		}
 	}
 	delete[]G.vexes;
-	G.vexes = NULL;
+	G.vexes = nullptr;
 	G.vexnumber = 0;
 	return 0;
 }
@@ -77,7 +77,7 @@ int Topology(Graph &G, int Topo[])
 	int *indegree = new int[G.vexnumber];
 	for (int i = 0; i < G.vexnumber; i++) indegree[i] = 0;
 	for (int i = 0; i < G.vexnumber; i++)
-		for (ArcNode *p = G.vexes[i].firstarc; p != NULL; p = p->nextarc)
+		for (ArcNode *p = G.vexes[i].firstarc; p != nullptr; p = p->nextarc)
 			indegree[p->adj]++;
 
 	// 入度为0的顶点入栈或队
@@ -94,7 +94,7 @@ int Topology(Graph &G, int Topo[])
 		Topo[i++] = j;
 
 		// 将Vj的邻接点的入度减1，减为0的邻接点入栈
-		for (ArcNode *p = G.vexes[j].firstarc; p != NULL; p = p->nextarc)
+		for (ArcNode *p = G.vexes[j].firstarc; p != nullptr; p = p->nextarc)
 		{
 			indegree[p->adj]--;
 			if (indegree[p->adj] == 0) s.push(p->adj);

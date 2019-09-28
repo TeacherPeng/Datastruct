@@ -24,7 +24,7 @@ const char *strstr(const char *src, const char *pattern, int &count)
 	if (*p1 == '\0')
 		return p0 - (p1 - pattern);
 	else
-		return NULL;
+		return nullptr;
 }
 
 const char *strstr(const char *src, const char *pattern, vector<int> &nextval, int &count)
@@ -54,7 +54,7 @@ const char *strstr(const char *src, const char *pattern, vector<int> &nextval, i
 	if (*p1 == '\0')
 		return p0 - (p1 - pattern);
 	else
-		return NULL;
+		return nullptr;
 }
 
 int GetNextval(vector<int> &nextval, const char *pattern)
@@ -94,7 +94,7 @@ int main()
 
 		int comparecount = 0, matchcount = 0;
 		const char *p = text;
-		while ((p = strstr(p, pattern.c_str(), comparecount)) != NULL)
+		while ((p = strstr(p, pattern.c_str(), comparecount)) != nullptr)
 		{
 			p++;
 			matchcount++;
@@ -104,7 +104,7 @@ int main()
 		comparecount = 0;
 		matchcount = 0;
 		p = text;
-		while ((p = strstr(p, pattern.c_str(), nextval, comparecount)) != NULL)
+		while ((p = strstr(p, pattern.c_str(), nextval, comparecount)) != nullptr)
 		{
 			p++;
 			matchcount++;

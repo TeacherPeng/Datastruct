@@ -215,7 +215,7 @@ int CreateRandSequence(int L[], int n, int m)
 
 int main()
 {
-	srand((unsigned int)time(NULL));
+	srand((unsigned int)time(nullptr));
 	int *L0, *L;
 	int n = 16, m = 50;
 	L0 = new int[n];

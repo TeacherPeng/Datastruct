@@ -2,7 +2,7 @@
 #include <cstring>
 using namespace std;
 
-// Í¼ÊéÐÅÏ¢
+// Í¼ï¿½ï¿½ï¿½ï¿½Ï¢
 struct Book
 {
 	char name[1024];
@@ -10,7 +10,7 @@ struct Book
 	char code[20];
 };
 
-// ¼ÇÂ¼½áµã
+// ï¿½ï¿½Â¼ï¿½ï¿½ï¿½
 struct BookNode
 {
 	Book data;
@@ -19,54 +19,54 @@ struct BookNode
 
 typedef BookNode* Books;
 
-// ³õÊ¼»¯
+// ï¿½ï¿½Ê¼ï¿½ï¿½
 int InitLibrary(Books &L)
 {
-	// ´´½¨Í·½áµã
+	// ï¿½ï¿½ï¿½ï¿½Í·ï¿½ï¿½ï¿½
 	L = new BookNode;
-	L->next = NULL;
+	L->next = nullptr;
 	return 0;
 }
 
-// ½«Ò»±¾Êé²åµ½Ä¿Â¼µÄÖ¸¶¨Î»ÖÃµÄºóÃæ
-// Ô¼¶¨Ö¸¶¨Î»ÖÃÈç¹û²»ºÏÀí£¬Ôò·µ»Ø1
+// ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½åµ½Ä¿Â¼ï¿½ï¿½Ö¸ï¿½ï¿½Î»ï¿½ÃµÄºï¿½ï¿½ï¿½
+// Ô¼ï¿½ï¿½Ö¸ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ò·µ»ï¿½1
 int InsertAfter(BookNode* p, Book aBook)
 {
-	// ¼ì²é²ÎÊýÊÇ·ñºÏÀí
-	if (p == NULL) return 1;
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½
+	if (p == nullptr) return 1;
 
-	// ´´½¨ÐÂ½áµã
+	// ï¿½ï¿½ï¿½ï¿½ï¿½Â½ï¿½ï¿½
 	BookNode* q = new BookNode;
 	q->data = aBook;
 
-	// ½«ÐÂ½áµã¹Ò½Óµ½Ö¸¶¨½áµãºóÃæ
+	// ï¿½ï¿½ï¿½Â½ï¿½ï¿½Ò½Óµï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	q->next = p->next;
 	p->next = q;
 
 	return 0;
 }
 
-// ´ÓÍ¼ÊéÄ¿Â¼ÖÐÉ¾³ýÖ¸¶¨Î»ÖÃºóÃæµÄÍ¼Êé¼ÇÂ¼
-// Ô¼¶¨Ö¸¶¨Î»ÖÃÈç¹û²»ºÏÀí£¬Ôò·µ»Ø1
+// ï¿½ï¿½Í¼ï¿½ï¿½Ä¿Â¼ï¿½ï¿½É¾ï¿½ï¿½Ö¸ï¿½ï¿½Î»ï¿½Ãºï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½Â¼
+// Ô¼ï¿½ï¿½Ö¸ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ò·µ»ï¿½1
 int RemoveAfter(BookNode* p)
 {
-	// ¼ì²é²ÎÊýÊÇ·ñºÏÀí
-	if (p == NULL || p->next == NULL) return 1;
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½
+	if (p == nullptr || p->next == nullptr) return 1;
 
-	// ½«´ýÉ¾³ýµÄ½áµã´ÓÁ´ÉÏÕªÏÂÀ´
+	// ï¿½ï¿½ï¿½ï¿½É¾ï¿½ï¿½ï¿½Ä½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Õªï¿½ï¿½ï¿½ï¿½
 	BookNode* q = p->next;
 	p->next = q->next;
 
-	// É¾³ýÄ¿±ê½áµã
+	// É¾ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½
 	delete q;
 
 	return 0;
 }
 
-// ´òÓ¡Í¼ÊéÄ¿Â¼
+// ï¿½ï¿½Ó¡Í¼ï¿½ï¿½Ä¿Â¼
 int PrintBooks(Books& L)
 {
-	for (BookNode* p = L->next; p != NULL; p = p->next)
+	for (BookNode* p = L->next; p != nullptr; p = p->next)
 	{
 		cout << p->data.name << "\t"
 			<< p->data.author << "\t"
@@ -75,24 +75,24 @@ int PrintBooks(Books& L)
 	return 0;
 }
 
-// °´ÊéÃû²éÕÒÍ¼Êé¼ÇÂ¼
-// Èç¹ûÕÒµ½£¬·µ»ØÖ¸ÏòÇ°Ò»½áµãµÄÖ¸Õë
-// Èç¹ûÃ»ÓÐÕÒµ½£¬Ô¼¶¨·µ»ØNULL¡£
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½Â¼
+// ï¿½ï¿½ï¿½ï¿½Òµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½Ç°Ò»ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½
+// ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½Òµnullptrï¿½ï¿½ï¿½ï¿½ï¿½ï¿½NULLï¿½ï¿½
 BookNode* FindPrev(Books &L, char aName[])
 {
-	// Ë³Ðò±éÀú²éÕÒ
-	for (BookNode* p = L; p->next != NULL; p = p->next)
+	// Ë³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	for (BookNode* p = L; p->next != nullptr; p = p->next)
 	{
 		if (strcmp(p->next->data.name, aName) == 0)
 			return p;
 	}
-	return NULL;
+	return nullptr;
 }
 
-// ³·Ïú
+// ï¿½ï¿½ï¿½ï¿½
 int DestroyLibrary(Books& L)
 {
-	while (L != NULL)
+	while (L != nullptr)
 	{
 		BookNode* p = L;
 		L = L->next;
@@ -103,12 +103,12 @@ int DestroyLibrary(Books& L)
 
 int ShowMenu()
 {
-	cout << "1. Ìí¼ÓÍ¼Êé" << endl;
-	cout << "2. °´ÊéÃûÉ¾³ýÍ¼Êé" << endl;
-	cout << "3. °´ÊéÃû²éÕÒÍ¼Êé" << endl;
-	cout << "4. ´òÓ¡Í¼ÊéÄ¿Â¼" << endl;
-	cout << "0. ÍË³ö" << endl;
-	cout << "ÇëÑ¡Ôñ£º";
+	cout << "1. ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½" << endl;
+	cout << "2. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É¾ï¿½ï¿½Í¼ï¿½ï¿½" << endl;
+	cout << "3. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½" << endl;
+	cout << "4. ï¿½ï¿½Ó¡Í¼ï¿½ï¿½Ä¿Â¼" << endl;
+	cout << "0. ï¿½Ë³ï¿½" << endl;
+	cout << "ï¿½ï¿½Ñ¡ï¿½ï¿½";
 
 	int op;
 	cin >> op;
@@ -127,49 +127,49 @@ int main()
 		{
 		case 1:
 		{
-			// Ìí¼ÓÍ¼Êé£¨²ÉÓÃ±ê×¼ÊäÈë£¬ÊéÃû¡¢×÷ÕßÃûºÍ±àÂëÖÐ²»ÄÜº¬ÓÐ¿Õ°×·û£©
+			// ï¿½ï¿½ï¿½ï¿½Í¼ï¿½é£¨ï¿½ï¿½ï¿½Ã±ï¿½×¼ï¿½ï¿½ï¿½ë£¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í±ï¿½ï¿½ï¿½ï¿½Ð²ï¿½ï¿½Üºï¿½ï¿½Ð¿Õ°×·ï¿½ï¿½ï¿½
 			Book aBook;
 			int aIndex;
-			cout << "ÇëÒÀ´ÎÊäÈë ÊéÃû ×÷Õß ±àÂë ²åÈëÎ»ÖÃ£º";
+			cout << "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Î»ï¿½Ã£ï¿½";
 			cin >> aBook.name >> aBook.author >> aBook.code >> aIndex;
 
-			// ¶¨Î»²åÈëÎ»ÖÃ
+			// ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½
 			BookNode* aPos = lib;
-			for (int i = 0; i < aIndex && aPos != NULL; i++)
+			for (int i = 0; i < aIndex && aPos != nullptr; i++)
 				aPos = aPos->next;
 
-			if (aPos == NULL)
-				cout << "¶¨Î»Ê§°Ü£¡" << endl;
+			if (aPos == nullptr)
+				cout << "ï¿½ï¿½Î»Ê§ï¿½Ü£ï¿½" << endl;
 			else if (InsertAfter(aPos, aBook) == 0)
-				cout << "²åÈë¼ÇÂ¼³É¹¦£¡" << endl;
+				cout << "ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½É¹ï¿½ï¿½ï¿½" << endl;
 			else
-				cout << "²åÈë¼ÇÂ¼Ê§°Ü£¡" << endl;
+				cout << "ï¿½ï¿½ï¿½ï¿½ï¿½Â¼Ê§ï¿½Ü£ï¿½" << endl;
 			break;
 		}
 		case 2:
 		{
-			// °´ÊéÃûÉ¾³ýÍ¼Êé
+			// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É¾ï¿½ï¿½Í¼ï¿½ï¿½
 			char aName[1024];
-			cout << "ÇëÊäÈëÒªÉ¾³ýÍ¼ÊéµÄÊéÃû£º";
+			cout << "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÒªÉ¾ï¿½ï¿½Í¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
 			cin >> aName;
 			BookNode* aPos = FindPrev(lib, aName);
-			if (aPos == NULL)
-				cout << "Ã»ÓÐÕÒµ½ÒªÉ¾³ýµÄÍ¼Êé£¡" << endl;
+			if (aPos == nullptr)
+				cout << "Ã»ï¿½ï¿½ï¿½Òµï¿½ÒªÉ¾ï¿½ï¿½ï¿½ï¿½Í¼ï¿½é£¡" << endl;
 			else if (RemoveAfter(aPos) == 0)
-				cout << "É¾³ýÍ¼Êé³É¹¦£¡" << endl;
+				cout << "É¾ï¿½ï¿½Í¼ï¿½ï¿½É¹ï¿½ï¿½ï¿½" << endl;
 			else
-				cout << "É¾³ýÍ¼ÊéÊ§°Ü£¡" << endl;
+				cout << "É¾ï¿½ï¿½Í¼ï¿½ï¿½Ê§ï¿½Ü£ï¿½" << endl;
 			break;
 		}
 		case 3:
 		{
-			// °´ÊéÃû²éÕÒÍ¼Êé
+			// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½
 			char aName[1024];
-			cout << "ÇëÊäÈëÒª²éÕÒµÄÍ¼ÊéµÄÊéÃû£º";
+			cout << "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½Òµï¿½Í¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
 			cin >> aName;
 			BookNode* p = FindPrev(lib, aName);
-			if (p == NULL || p->next == NULL)
-				cout << "Ã»ÓÐÕÒµ½ÏàÍ¬ÊéÃûµÄ¼ÇÂ¼£¡" << endl;
+			if (p == nullptr || p->next == nullptr)
+				cout << "Ã»ï¿½ï¿½ï¿½Òµï¿½ï¿½ï¿½Í¬ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½Â¼ï¿½ï¿½" << endl;
 			else
 				cout << p->next->data.name << "\t"
 					<< p->next->data.author << "\t"
@@ -178,7 +178,7 @@ int main()
 		}
 		case 4:
 		{
-			// ´òÓ¡Í¼ÊéÄ¿Â¼
+			// ï¿½ï¿½Ó¡Í¼ï¿½ï¿½Ä¿Â¼
 			PrintBooks(lib);
 			break;
 		}

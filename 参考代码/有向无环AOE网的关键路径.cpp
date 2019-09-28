@@ -32,14 +32,14 @@ int InitGraph(Graph &G, int vexnumber)
 	G.vexnumber = vexnumber;
 	G.arcnumber = 0;
 	for (int i = 0; i < vexnumber; i++)
-		G.vexes[i].firstarc = NULL;
+		G.vexes[i].firstarc = nullptr;
 	return 0;
 }
 int DestroyGraph(Graph &G)
 {
 	for (int i = 0; i < G.vexnumber; i++)
 	{
-		while (G.vexes[i].firstarc != NULL)
+		while (G.vexes[i].firstarc != nullptr)
 		{
 			ArcNode *p = G.vexes[i].firstarc;
 			G.vexes[i].firstarc = p->nextarc;
@@ -47,7 +47,7 @@ int DestroyGraph(Graph &G)
 		}
 	}
 	delete[]G.vexes;
-	G.vexes = NULL;
+	G.vexes = nullptr;
 	G.vexnumber = 0;
 	return 0;
 }
@@ -78,7 +78,7 @@ int CriticalPath(Graph &G, int(*aCriticalArcs)[2])
 	int *indegree = new int[G.vexnumber];
 	for (int i = 0; i < G.vexnumber; i++) indegree[i] = 0;
 	for (int i = 0; i < G.vexnumber; i++)
-		for (ArcNode *p = G.vexes[i].firstarc; p != NULL; p = p->nextarc)
+		for (ArcNode *p = G.vexes[i].firstarc; p != nullptr; p = p->nextarc)
 			indegree[p->adj]++;
 
 	// 入度为0的顶点入栈
@@ -96,7 +96,7 @@ int CriticalPath(Graph &G, int(*aCriticalArcs)[2])
 		int i = s.top(); s.pop();
 		s2.push(i);
 		// 遍历Vi的所有邻接点
-		for (ArcNode *p = G.vexes[i].firstarc; p != NULL; p = p->nextarc)
+		for (ArcNode *p = G.vexes[i].firstarc; p != nullptr; p = p->nextarc)
 		{
 			// 将Vi的邻接点Vj入度减1，减到0则Vj入栈等待拓扑排序
 			int j = p->adj;
@@ -117,7 +117,7 @@ int CriticalPath(Graph &G, int(*aCriticalArcs)[2])
 	{
 		int i = s2.top(); s2.pop();
 		// 用Vi的邻接点来修正Vi的vl值
-		for (ArcNode *p = G.vexes[i].firstarc; p != NULL; p = p->nextarc)
+		for (ArcNode *p = G.vexes[i].firstarc; p != nullptr; p = p->nextarc)
 		{
 			int j = p->adj;
 			if (vl[j] - p->weight < vl[i])
@@ -129,7 +129,7 @@ int CriticalPath(Graph &G, int(*aCriticalArcs)[2])
 	int count = 0;
 	for (int i = 0; i < G.vexnumber; i++)
 	{
-		for (ArcNode *p = G.vexes[i].firstarc; p != NULL; p = p->nextarc)
+		for (ArcNode *p = G.vexes[i].firstarc; p != nullptr; p = p->nextarc)
 		{
 			int e = ve[i];
 			int l = vl[p->adj] - p->weight;

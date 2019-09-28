@@ -33,14 +33,14 @@ int InitGraph(Graph &G, int vexnumber)
 	G.vexnumber = vexnumber;
 	G.arcnumber = 0;
 	for (int i = 0; i < vexnumber; i++)
-		G.vexes[i].firstarc = NULL;
+		G.vexes[i].firstarc = nullptr;
 	return 0;
 }
 int DestroyGraph(Graph &G)
 {
 	for (int i = 0; i < G.vexnumber; i++)
 	{
-		while (G.vexes[i].firstarc != NULL)
+		while (G.vexes[i].firstarc != nullptr)
 		{
 			ArcNode *p = G.vexes[i].firstarc;
 			G.vexes[i].firstarc = p->nextarc;
@@ -48,7 +48,7 @@ int DestroyGraph(Graph &G)
 		}
 	}
 	delete[]G.vexes;
-	G.vexes = NULL;
+	G.vexes = nullptr;
 	G.vexnumber = 0;
 	return 0;
 }
@@ -93,7 +93,7 @@ vector<vector<int>> Floyd(Graph &G)
 			aPaths[i][j] = -1;
 		}
 	for (int i = 0; i < G.vexnumber; i++)
-		for (ArcNode *p = G.vexes[i].firstarc; p != NULL; p = p->nextarc)
+		for (ArcNode *p = G.vexes[i].firstarc; p != nullptr; p = p->nextarc)
 		{
 			shortest[i][p->adj] = p->weight;
 			aPaths[i][p->adj] = i;

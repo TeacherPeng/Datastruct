@@ -12,7 +12,7 @@ typedef BiNode *BiTree;
 BiTree CreateBiTree(const char *prestr, const char *midstr, int n)
 {
     if (n <= 0)
-        return NULL;
+        return nullptr;
     // 创建根结点
     BiTree T = new BiNode;
     T->data = *prestr;
@@ -29,7 +29,7 @@ BiTree CreateBiTree(const char *prestr, const char *midstr, int n)
     }
 
     if (rootpos == -1)
-        return NULL;
+        return nullptr;
     // 分别创建左子树和右子树
     T->lchild = CreateBiTree(prestr + 1, midstr, rootpos);
     T->rchild = CreateBiTree(prestr + 1 + rootpos, midstr + 1 + rootpos, n - rootpos - 1);
@@ -38,7 +38,7 @@ BiTree CreateBiTree(const char *prestr, const char *midstr, int n)
 
 int SucTraverse(BiTree T)
 {
-    if (T == NULL)
+    if (T == nullptr)
         return 1;
     SucTraverse(T->lchild);
     SucTraverse(T->rchild);
@@ -48,7 +48,7 @@ int SucTraverse(BiTree T)
 
 int LevelTraverse(BiTree T)
 {
-    if (T == NULL)
+    if (T == nullptr)
         return 1;
     queue<BiNode *> Q;
     Q.push(T);
@@ -57,21 +57,21 @@ int LevelTraverse(BiTree T)
         T = Q.front();
         Q.pop();
         cout << T->data;
-        if (T->lchild != NULL)
+        if (T->lchild != nullptr)
             Q.push(T->lchild);
-        if (T->rchild != NULL)
+        if (T->rchild != nullptr)
             Q.push(T->rchild);
     }
     return 1;
 }
 int DestroyBiTree(BiTree &T)
 {
-    if (T == NULL)
+    if (T == nullptr)
         return 1;
     DestroyBiTree(T->lchild);
     DestroyBiTree(T->rchild);
     delete T;
-    T = NULL;
+    T = nullptr;
     return 1;
 }
 
