@@ -120,7 +120,7 @@ int Remove(BiTree &T, int aKey)
         // 找到右子的最左结点
         BiNode **q = &((*p)->rchild);
         while ((*q)->lchild != nullptr)
-            *q = (*q)->lchild;
+            q = &(*q)->lchild;
 
         // 用右子最左结点的右子替换最左结点
         BiNode *temp = *q;
