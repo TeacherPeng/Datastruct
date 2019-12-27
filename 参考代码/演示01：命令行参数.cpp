@@ -7,8 +7,8 @@ using namespace std;
 // 显示使用说明
 int ShowHelp()
 {
-    cout << "Usage: demo01 [z|x] sourcefile destfile" << endl;
-    cout << "    z means zip sourcefile to destfile, x means extract sourcefile to destfile." << endl;
+    cout << "Usage: demo01 [-z|-x] sourcefile destfile" << endl;
+    cout << "    -z means zip sourcefile to destfile, -x means extract sourcefile to destfile." << endl;
     return 0;
 }
 
@@ -26,11 +26,11 @@ int main(int argc, char *argv[])
     {
         ShowHelp();
     }
-    else if (stricmp(argv[1], "z") == 0)
+    else if (stricmp(argv[1], "-z") == 0)
     {
         cout << "Zip " << argv[2] << " to " << argv[3] << " ..." << endl;
     }
-    else if (stricmp(argv[1], "e") == 0)
+    else if (stricmp(argv[1], "-x") == 0)
     {
         cout << "Extract " << argv[2] << " to " << argv[3] << " ..." << endl;
     }

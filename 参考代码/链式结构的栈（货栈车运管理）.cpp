@@ -1,7 +1,7 @@
-#include <iostream>
+﻿#include <iostream>
 using namespace std;
 
-// ����ʽ�ṹʵ��ջ������Ԫ��Ϊ������
+// 链表结点结构定义
 struct StackNode
 {
 	int data;
@@ -9,53 +9,54 @@ struct StackNode
 };
 typedef StackNode *Stack;
 
-// ��ʼ��
+// 初始化栈
 int InitStack(Stack &S)
 {
 	S = nullptr;
 	return 0;
 }
 
-// �ж�ջ�Ƿ�Ϊ��
+// 判断栈是否为空，如果为空则返回true
 bool Empty(Stack S)
 {
 	return S == nullptr;
 }
 
-// ��ȡջ��Ԫ��
+// 读取栈顶元素
 int Top(Stack S)
 {
 	return S->data;
 }
 
-// ��ջ
+// 将指定元素入栈
 int Push(Stack &S, int data)
 {
-	// �����½��
+	// 创建新结点
 	StackNode *p = new StackNode;
 	p->data = data;
 
-	// ��ջ
+	// 将新结点插入在表头位置
 	p->next = S;
 	S = p;
 
 	return 0;
 }
 
-// ��ջ��Լ��ջ��ʱ����1
+// 从栈中弹出一个结点
 int Pop(Stack &S)
 {
-	if (Empty(S)) return 1;
-	// �ݴ�ջ��Ԫ��
+	if (Empty(S))
+		return 1;
+	// 暂存栈顶（表头）结点
 	StackNode *p = S;
-	// ժ��ջ��Ԫ��
+	// 将栈顶结点摘下
 	S = S->next;
-	// ɾ��ժ�µ�ջ��Ԫ��
+	// 删除摘下的结点
 	delete p;
 	return 0;
 }
 
-// ����
+// 撤销栈
 int DestroyStack(Stack &S)
 {
 	while (!Empty(S))
@@ -63,13 +64,13 @@ int DestroyStack(Stack &S)
 	return 0;
 }
 
-// �����˵�
+// 显示操作菜单，输入并返回操作选择
 int ShowMenu()
 {
-	cout << "1. �����ջ" << endl;
-	cout << "2. �����ջ" << endl;
-	cout << "0. �˳�" << endl;
-	cout << "��ѡ�������";
+	cout << "1. 车厢入栈" << endl;
+	cout << "2. 车厢出栈" << endl;
+	cout << "0. 退出" << endl;
+	cout << "请选择操作：";
 
 	int op;
 	cin >> op;
@@ -87,29 +88,29 @@ int main()
 		{
 		case 1:
 		{
-			// �����ջ
+			// 车厢入栈
 			int aNo;
-			cout << "�������ջ����ţ�";
+			cout << "请输入入栈车厢的编号：";
 			cin >> aNo;
 			if (Push(S, aNo) != 0)
-				cout << "�����ջʧ�ܣ�" << endl;
+				cout << "入栈失败！" << endl;
 			else
-				cout << aNo << "�ų����ջ��ϡ�" << endl;
-			cout << aNo << "�ų����ջ��ϡ�" << endl;
+				cout << aNo << "入栈成功！" << endl;
+			cout << aNo << "已入栈。" << endl;
 			break;
 		}
 		case 2:
 		{
-			// �����ջ
+			// 车厢出栈
 			if (Empty(S))
 			{
-				cout << "��ջ���ǿյģ�û�г�����Գ�ջ�ˡ�" << endl;
+				cout << "栈中没有车厢可以出栈！" << endl;
 			}
 			else
 			{
 				int aNo = Top(S);
 				Pop(S);
-				cout << aNo << "�ų����ջ��" << endl;
+				cout << aNo << "已出栈。" << endl;
 			}
 			break;
 		}

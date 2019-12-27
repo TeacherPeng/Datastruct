@@ -1,4 +1,4 @@
-﻿// 演示如何使用基于字节的文件流
+﻿// 演示如何使用C++的标准库读写基于字节的文件流
 // 
 #include <iostream>
 #include <fstream>
