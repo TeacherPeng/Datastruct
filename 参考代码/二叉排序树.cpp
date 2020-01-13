@@ -141,7 +141,7 @@ int PreTraverse(BiTree T)
 {
     if (T == nullptr)
         return 0;
-    cout << T->key << ", ";
+    cout << T->key << " ";
     PreTraverse(T->lchild);
     PreTraverse(T->rchild);
     return 0;
@@ -151,7 +151,7 @@ int InTraverse(BiTree T)
     if (T == nullptr)
         return 0;
     InTraverse(T->lchild);
-    cout << T->key << ", ";
+    cout << T->key << " ";
     InTraverse(T->rchild);
     return 0;
 }
@@ -161,7 +161,7 @@ int SucTraverse(BiTree T)
         return 0;
     SucTraverse(T->lchild);
     SucTraverse(T->rchild);
-    cout << T->key << ", ";
+    cout << T->key << " ";
     return 0;
 }
 
@@ -169,7 +169,7 @@ int CreateRands(int datas[], int n, int m)
 {
     for (int i = 0; i < n; i++)
         datas[i] = i + 1;
-    srand((unsigned int)time(nullptr));
+    // srand((unsigned int)time(nullptr));
     for (int i = 0; i < m; i++)
         swap(datas[rand() % n], datas[rand() % n]);
     return 0;
@@ -194,34 +194,69 @@ int Print(BiTree T)
 
 int main()
 {
-    constexpr int n = 16, m = 20;
-    int datas[n];
-    CreateRands(datas, n, m);
-    cout << "输入序列：";
-    for (int i = 0; i < n; i++)
+    // srand((unsigned int)time(NULL));
+    // for (int i = 0; i < 20; i++)
+    // {
+    //     int n = rand() % 40 + 10;
+    //     cout << n;
+    //     int *datas = new int[n];
+    //     CreateRands(datas, n, 2 * n);
+    //     for (int i = 0; i < n; i++)
+    //     {
+    //         cout << ' ' << datas[i];
+    //     }
+    //     cout << endl;
+    //     delete[] datas;
+    // }
+
+    int n;
+    while (cin >> n)
     {
-        cout << datas[i] << ", ";
+        int *datas = new int[n];
+        for (int i = 0; i < n; i++)
+        {
+            cin >> datas[i];
+        }
+        BiTree T;
+        InitBiTree(T);
+        for (int i = 0; i < n; i++)
+        {
+            Insert(T, datas[i]);
+        }
+        PreTraverse(T);
+        cout << endl;
+        DestroyBiTree(T);
+        delete[] datas;
     }
-    cout << endl;
 
-    cout << "构造排序二叉树……" << endl;
-    BiTree T;
-    InitBiTree(T);
-    for (int i = 0; i < n; i++)
-    {
-        Insert(T, datas[i]);
-    }
-    Print(T);
+    // constexpr int n = 16, m = 20;
+    // int datas[n];
+    // CreateRands(datas, n, m);
+    // cout << "输入序列：";
+    // for (int i = 0; i < n; i++)
+    // {
+    //     cout << datas[i] << ", ";
+    // }
+    // cout << endl;
 
-    cout << "删除8：" << endl;
-    Remove(T, 8);
-    Print(T);
+    // cout << "构造排序二叉树……" << endl;
+    // BiTree T;
+    // InitBiTree(T);
+    // for (int i = 0; i < n; i++)
+    // {
+    //     Insert(T, datas[i]);
+    // }
+    // Print(T);
 
-    cout << "插入8：" << endl;
-    Insert2(T, 8);
-    Print(T);
+    // cout << "删除8：" << endl;
+    // Remove(T, 8);
+    // Print(T);
 
-    DestroyBiTree(T);
-    system("pause");
+    // cout << "插入8：" << endl;
+    // Insert2(T, 8);
+    // Print(T);
+
+    // DestroyBiTree(T);
+    // system("pause");
     return 0;
 }
