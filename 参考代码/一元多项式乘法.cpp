@@ -64,7 +64,7 @@ int DeleteAfter(PolyNode* p)
 }
 
 // 判断一元多项式链表是否为已撤销的无效链表
-int IsNull(Poly aPoly)
+bool IsNull(Poly aPoly)
 {
 	return aPoly == nullptr;
 }
@@ -203,7 +203,7 @@ Poly PolyMulti(Poly A, Poly B)
 {   
 	Poly C;
 	InitPoly(C);
-	for (PolyNode* pb = B->next; pb != NULL; pb = pb->next)
+	for (PolyNode* pb = B->next; pb != nullptr; pb = pb->next)
 	{
 		Poly D = SPolyMulti(A, pb->c, pb->e);
 
