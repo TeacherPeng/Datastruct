@@ -3,6 +3,7 @@
 #include <vector>
 using namespace std;
 
+// 朴素模式匹配算法
 const char *strstr(const char *src, const char *pattern, int &count)
 {
 	const char *p0 = src;
@@ -27,6 +28,7 @@ const char *strstr(const char *src, const char *pattern, int &count)
 		return nullptr;
 }
 
+// KMP模式匹配算法——在nextval向量指导下的模式匹配
 const char *strstr(const char *src, const char *pattern, vector<int> &nextval, int &count)
 {
 	const char *p0 = src;
@@ -57,17 +59,20 @@ const char *strstr(const char *src, const char *pattern, vector<int> &nextval, i
 		return nullptr;
 }
 
+// KMP算法之nextval向量计算算法
+// 计算指定模式串pattern的nextval向量
 int GetNextval(vector<int> &nextval, const char *pattern)
 {
+	// k的初始值为K[0]，因K[1]的值为0，所以初始化K[0]为-1，这样k++刚好可以得到K[1]
 	int k = -1;
 	nextval[0] = -1;
 	for (int i = 1; pattern[i] != '\0'; i++)
 	{
-		// 此时k为K[i-1]
+		// 此时k为K[i-1]，即pattern[0~i-2]的最大相同首尾真子串的长度
 		while (k != -1 && pattern[k] != pattern[i - 1])
 			k = nextval[k];
 		
-		// 此时k+1为K[i]
+		// 此时k+1为K[i]，即pattern[0~i-1]的最大相同首尾真子串的长度
 		k++;
 
 		if (pattern[k] != pattern[i])
