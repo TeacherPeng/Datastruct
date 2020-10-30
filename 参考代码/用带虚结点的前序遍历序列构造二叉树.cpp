@@ -30,6 +30,7 @@ const char *CreateBiTree(BiTree &T, const char *s)
 {
     if (s == nullptr || *s == '\0')
         return nullptr;
+    // cout << "Create bitree with \"" << s << "\"" << endl;
     if (*s=='#')
     {
         T = nullptr;
@@ -37,9 +38,9 @@ const char *CreateBiTree(BiTree &T, const char *s)
     }
     T = new BiNode;
     T->data = *s;
+    // cout << "Create [" << *s << "]'s left with \"" << s + 1 << "\"" << endl;
     const char *afterLeft = CreateBiTree(T->lchild, s + 1);
-    if (afterLeft == nullptr)
-        return nullptr;
+    // cout << "Create [" << *s << "]'s right with \"" << afterLeft << "\"" << endl;
     const char *afterRight = CreateBiTree(T->rchild, afterLeft);
     return afterRight;
 }
