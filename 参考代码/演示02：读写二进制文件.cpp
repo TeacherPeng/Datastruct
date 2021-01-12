@@ -30,8 +30,8 @@ int main(int argc, char *argv[])
     }
 
     // 从输入文件流逐字节读入，并写到输出文件流中
-    char ch;
-    while (instr.get(ch))
+    int ch;
+    while (ch = instr.get(), !instr.eof())
     {
         outstr.put(ch);
     }
