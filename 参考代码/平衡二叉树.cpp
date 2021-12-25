@@ -62,10 +62,6 @@ int LRAdjust(AVLNode *&p)
         p->lchild->balance = 0;
         p->rchild->balance = -1;
         break;
-    case 0:
-        p->lchild->balance = 0;
-        p->rchild->balance = 0;
-        break;
     case -1:
         p->lchild->balance = 1;
         p->rchild->balance = 0;
@@ -83,10 +79,6 @@ int RLAdjust(AVLNode *&p)
     {
     case -1:
         p->lchild->balance = 1;
-        p->rchild->balance = 0;
-        break;
-    case 0:
-        p->lchild->balance = 0;
         p->rchild->balance = 0;
         break;
     case 1:
