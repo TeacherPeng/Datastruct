@@ -17,7 +17,7 @@ struct BookNode
 	BookNode* next;
 };
 
-typedef BookNode* Books;
+using Books = BookNode*;
 
 // 初始化单链表
 int InitLibrary(Books &L)

@@ -9,7 +9,7 @@ struct BiNode
     string data;
     BiNode *lchild, *rchild;
 };
-typedef BiNode *BiTree;
+using BiTree = BiNode *;
 
 int InitBiTree(BiTree &T)
 {

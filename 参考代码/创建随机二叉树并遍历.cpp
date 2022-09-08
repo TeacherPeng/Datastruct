@@ -18,7 +18,7 @@ struct BiNode
     char data;
     BiNode *lchild, *rchild;
 };
-typedef BiNode *BiTree;
+using BiTree = BiNode *;
 int DestroyBiTree(BiTree &T)
 {
     if (T == nullptr)

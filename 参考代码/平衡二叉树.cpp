@@ -16,7 +16,7 @@ struct AVLNode
     int balance;
     AVLNode *lchild, *rchild;
 };
-using AVLTree = AVLNode *; // typedef AVLNode *AVLTree;
+using AVLTree = AVLNode *;
 
 AVLNode::~AVLNode()
 {

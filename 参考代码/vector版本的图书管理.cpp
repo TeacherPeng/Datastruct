@@ -10,7 +10,7 @@ struct Book
 	char author[50];
 	char code[20];
 };
-typedef vector<Book> Books;
+using Books = vector<Book>;
 
 // 打印图书目录
 int PrintBooks(Books &aLib)

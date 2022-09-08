@@ -10,7 +10,7 @@ struct PolyNode
 };
 
 // 一元多项式单链表
-typedef PolyNode* Poly;
+using Poly = PolyNode*;
 
 // 初始化带头结点的单链表
 int InitPoly(Poly& aPoly)

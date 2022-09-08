@@ -12,7 +12,7 @@ struct BiNode
     int key;
     BiNode *lchild, *rchild;
 };
-typedef BiNode *BiTree;
+using BiTree = BiNode *;
 
 int InitBiTree(BiTree &T)
 {

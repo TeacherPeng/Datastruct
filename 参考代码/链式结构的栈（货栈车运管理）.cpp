@@ -7,7 +7,7 @@ struct StackNode
 	int data;
 	StackNode *next;
 };
-typedef StackNode *Stack;
+using Stack = StackNode *;
 
 // 初始化栈
 int InitStack(Stack &S)

@@ -7,7 +7,7 @@ struct BiNode
     char data;
     BiNode *lchild, *rchild;
 };
-typedef BiNode *BiTree;
+using BiTree = BiNode *;
 
 BiTree CreateBiTree(const char *prestr, const char *midstr, int n)
 {

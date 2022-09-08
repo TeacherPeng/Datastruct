@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-using SmallSet = long; // typedef long SmallSet;
+using SmallSet = long;
 
 int Set(SmallSet &aSet, int aIndex)
 {
